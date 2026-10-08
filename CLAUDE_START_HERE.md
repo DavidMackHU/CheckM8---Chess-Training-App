@@ -38,8 +38,8 @@ Before doing anything else:
 | 14 | "Human moves" mode (Lichess opening explorer) | ✅ | Opponent picks moves by real-game frequency. `/train/human/:courseId`; `GET /api/explorer` is a cached proxy and needs `LICHESS_TOKEN` on the server |
 | 15 | Analysis board (Stockfish WASM) | ✅ | Runs in browser, no server cost. Single-threaded lite build, copied into `client/public/stockfish` before dev and build (no special headers needed). Stockfish is GPLv3 |
 | 16 | Testing (Jest + Playwright) | ✅ | `npm test`: 78 unit tests. `npm run test:e2e`: 33 browser tests (needs `npm run db:up` and seeded courses; starts the dev servers itself). `npm run check`: types, lint, unit tests |
-| 17 | CI/CD (GitHub Actions) | 🟨 | `.github/workflows/ci.yml` written: checks, browser tests, Docker build. All three jobs verified locally in a clean copy. **Not yet run on GitHub:** needs a first commit and a pushed repository |
-| 18 | Deployment (Vercel + Render + Supabase) | ⬜ | |
+| 17 | CI/CD (GitHub Actions) | ✅ | `.github/workflows/ci.yml`: checks, browser tests, Docker build. First run on GitHub passed all three jobs (33 browser tests) |
+| 18 | Deployment (Vercel + Render + Supabase) | 🟨 | `render.yaml` and `client/vercel.json` written. Waiting on David to create the Supabase, Render and Vercel projects |
 | 19 | Polish (responsive, PWA, loading/error states, dark theme) | ⬜ | |
 
 Status key: ⬜ not started · 🟨 in progress · ✅ done
@@ -85,7 +85,7 @@ Status key: ⬜ not started · 🟨 in progress · ✅ done
 - **Spaced repetition:** `ts-fsrs` (FSRS algorithm, same family Anki uses)
 - **Scripts:** `tsx` (runs the course generator and seed script directly from TypeScript)
 - **Backend:** Node.js + Express + TypeScript
-- **Database:** SQLite (local) → Supabase PostgreSQL (production)
+- **Database:** PostgreSQL in Docker (local) → Supabase PostgreSQL (production)
 - **ORM:** Prisma
 - **Auth:** JWT (bcrypt password hashing, httpOnly cookie)
 - **External data:** Lichess Opening Explorer API (move frequencies), Lichess `chess-openings` dataset (CC0, ECO names)
@@ -275,10 +275,10 @@ Start with step 1. Ask me before moving to each next step.
 **Steps:**
 1. Push repo to GitHub
 2. Supabase → new project → copy Session Pooler connection string → `DATABASE_URL`
-3. Locally: set `DATABASE_URL`, run `npx prisma db push`, then `npx tsx server/prisma/seed.ts` (loads every `content/*.json`)
-4. Render → New Web Service → `/server` → build `npm install && npm run build`, start `npm start` → add env vars `DATABASE_URL`, `JWT_SECRET`, `CLIENT_URL`, `LICHESS_TOKEN` (optional)
-5. Vercel → import repo → root `/client` → env var `VITE_API_URL` = Render URL
-6. Set CORS on the server to allow the Vercel domain with credentials (cookies)
+3. Locally, in PowerShell: set `$env:DATABASE_URL` and `$env:DATABASE_SSL="true"`, run `npm run db:push`, then `npm run db:seed` (loads every `content/*.json`)
+4. Render → New → Blueprint → pick the repo (reads `render.yaml`) → enter `DATABASE_URL` and `LICHESS_TOKEN`; `JWT_SECRET` is generated
+5. Put the Render URL in `client/vercel.json`, push, then Vercel → import repo → Root Directory `client`
+6. No CORS and no `VITE_API_URL`: Vercel forwards `/api` to Render, so the login cookie stays first-party
 
 **Common deployment fixes:**
 1. Render deploys — move `@types/*` packages to `dependencies`, not `devDependencies`

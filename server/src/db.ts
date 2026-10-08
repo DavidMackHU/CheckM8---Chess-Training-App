@@ -7,4 +7,7 @@ if (!connectionString) {
   throw new Error('Missing required environment variable DATABASE_URL. See server/.env.example.')
 }
 
-export const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString }) })
+// Hosted databases such as Supabase need an encrypted connection.
+const ssl = process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : undefined
+
+export const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString, ssl }) })

@@ -1,0 +1,31 @@
+# Render blueprint for the API. Render reads this file when you create a
+# Blueprint from the repository. The frontend is deployed separately on Vercel.
+services:
+  - type: web
+    name: checkm8-api
+    runtime: node
+    plan: free
+    region: oregon
+    # Tables and courses are loaded from your own machine (see CLAUDE_START_HERE.md),
+    # not here, so a deploy can never change the database by surprise.
+    buildCommand: npm ci -w server --include=dev && npm run build -w server
+    startCommand: npm run start -w server
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24
+      - key: NODE_ENV
+        value: production
+      # Supabase "Session pooler" connection string. Entered in the dashboard.
+      - key: DATABASE_URL
+        sync: false
+      - key: DATABASE_SSL
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      # Lichess personal token (no scopes). Entered in the dashboard.
+      - key: LICHESS_TOKEN
+        sync: false
+      # Proxies between the visitor and the API: Vercel, then Render's own.
+      - key: TRUST_PROXY
+        value: "3"

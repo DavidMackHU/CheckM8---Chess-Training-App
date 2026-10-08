@@ -11,8 +11,8 @@ import { trainRouter } from './routes/train.js'
 
 export function createApp() {
   const app = express()
-  // The API sits behind one proxy (Vite, nginx or the host), so trust its headers.
-  app.set('trust proxy', 1)
+  // How many proxies sit in front of the API. One locally (Vite or nginx); more in production.
+  app.set('trust proxy', Number(process.env.TRUST_PROXY) || 1)
   app.use(express.json({ limit: '1mb' }))
   app.use(cookieParser())
 
