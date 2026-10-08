@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.tsbuildinfo
+.explorer-cache/
+server/src/generated/
+*.log
+.DS_Store
+# Copied from node_modules by client/scripts/copy-stockfish.mjs
+client/public/stockfish/
+
+# Playwright output
+test-results/
+playwright-report/

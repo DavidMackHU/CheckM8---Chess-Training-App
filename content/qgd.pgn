@@ -1,0 +1,539 @@
+[Event "Queen's Gambit Declined"]
+[Round "1"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation: Nc3, Bg5, Nf3, Bh4, e3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 h6 6. Bh4 O-O 7. e3 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "2"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bf4 Be7 5. e3 O-O 6. Nf3 Nbd7 7. Bd3 dxc4 8. Bxc4 a6 9. O-O b5 10. Bd3 Bb7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "3"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, e3, Nf3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. e3 Be7 5. Nf3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "4"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Bogo-Indian Defense: Retreat Variation: Nf3, g3"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. g3 Bb4+ 5. Bd2 Be7 6. Bg2 O-O 7. O-O c6 8. Qc2 b6 9. Bf4 Bb7 10. Nbd2 Nh5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "5"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation: Nc3, cxd5, Bg5, e3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 c6 6. e3 Be7 7. Bd3 Nbd7 8. Nge2 O-O 9. O-O Re8 10. Qc2 Nf8 *
+
+[Event "Queen's Gambit Declined"]
+[Round "6"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, Nf3, e3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. e3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "7"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: e3, Nf3"]
+
+1. d4 d5 2. c4 e6 3. e3 Nf6 4. Nf3 Be7 5. Nc3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "8"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation: Nf3, Nc3, Bg5"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Be7 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "9"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: cxd5, Nc3, Nf3"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nc3 c6 5. Nf3 Bf5 6. Bf4 Bd6 7. Bxd6 Qxd6 8. e3 Nd7 9. Bd3 Bxd3 10. Qxd3 Ngf6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "10"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: e3, Nc3"]
+
+1. d4 d5 2. c4 e6 3. e3 Nf6 4. Nc3 Be7 5. Nf3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "11"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation: Nf3, Bg5"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nc3 h6 7. Bh4 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "12"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nf3, Nc3, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. Bd3 dxc4 8. Bxc4 a6 9. O-O b5 10. Bd3 Bb7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "13"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, cxd5, Nf3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Nf3 c6 6. Bg5 Be7 7. e3 Bf5 8. Bd3 Bxd3 9. Qxd3 Nbd7 10. O-O O-O *
+
+[Event "Queen's Gambit Declined"]
+[Round "14"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation: Nc3, Bg5, e3, Nf3, Bh4, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "15"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nf3, e3"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. e3 Be7 5. Nc3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "16"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense, Makogonov Exchange Variation: Nc3, Nf3, Bg5, Bh4, e3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. cxd5 Nxd5 9. Bxe7 Qxe7 10. Nxd5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "17"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Bg5, e3, Nf3, Bh4, Bd3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 8. Bd3 Bb7 9. O-O Nbd7 10. Rc1 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "18"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nf3, Nc3, e3"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Be7 5. e3 O-O 6. Bd3 dxc4 7. Bxc4 a6 8. O-O b5 9. Bd3 Bb7 10. a3 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "19"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Anti-Tartakower Variation: Nc3, Nf3, Bg5, Bxf6"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bxf6 Bxf6 7. e3 O-O 8. cxd5 exd5 9. Bd3 c6 10. O-O Bg4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "20"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Nc3, Bg5, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. cxd5 exd5 6. e3 O-O 7. Bd3 Nbd7 8. Nge2 Re8 9. O-O Nf8 10. Qc2 c6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "21"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Nf3, Bf4, e3, Bd3, Bxc4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. Bd3 dxc4 8. Bxc4 a6 9. O-O b5 10. Bd3 Bb7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "22"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Anti-Tartakower Variation: Nc3, Bg5, Nf3, Bxf6"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 h6 6. Bxf6 Bxf6 7. e3 O-O 8. cxd5 exd5 9. Bd3 c6 10. O-O Bg4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "23"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Modern Variation, Heral Variation: Nc3, Bg5, Bxf6"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Bxf6 Bxf6 6. e3 O-O 7. Nf3 b6 8. cxd5 exd5 9. Bd3 Bb7 10. O-O Nd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "24"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: cxd5, Nc3, Bf4"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nc3 c6 5. Bf4 Bd6 6. Bxd6 Qxd6 7. e3 Bf5 8. Bd3 Bxd3 9. Qxd3 Nf6 10. Nf3 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "25"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: cxd5, Nf3"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nf3 c6 5. Nc3 Bf5 6. Bf4 Bd6 7. Bxd6 Qxd6 8. e3 Nd7 9. Bd3 Bxd3 10. Qxd3 Ngf6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "26"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Nf3, Bg5, Bh4, e3, Bd3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. Bd3 Bb7 9. O-O Nbd7 10. Rc1 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "27"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Orthodox Defense, Botvinnik Variation: Nc3, Bg5, e3, Bd3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Bd3 Nbd7 7. Nf3 dxc4 8. Bxc4 c5 9. O-O a6 10. a4 cxd4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "28"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, Nf3, g3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. g3 O-O 6. Bg2 dxc4 7. O-O Nc6 8. e4 Rb8 9. a4 a6 10. d5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "29"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, Nf3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. cxd5 exd5 6. Bg5 c6 7. e3 Bf5 8. Bd3 Bxd3 9. Qxd3 Nbd7 10. O-O O-O *
+
+[Event "Queen's Gambit Declined"]
+[Round "30"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Anti-Tartakower Variation: Nc3, Bg5, e3, Nf3, Bxf6"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bxf6 Bxf6 8. cxd5 exd5 9. Bd3 c6 10. O-O Bg4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "31"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: e3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. e3 Nf6 4. cxd5 exd5 5. Nc3 c6 6. Nf3 Bd6 7. Bd3 O-O 8. O-O Bg4 9. h3 Bh5 10. Be2 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "32"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: e3, a3"]
+
+1. d4 d5 2. c4 e6 3. e3 Nf6 4. a3 Be7 5. Nc3 O-O 6. Nf3 b6 7. b4 Bb7 8. c5 a5 9. Bb2 axb4 10. axb4 Rxa1 *
+
+[Event "Queen's Gambit Declined"]
+[Round "33"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation, Reshevsky Variation: Nc3, cxd5, Bg5, Qc2, e3, Bd3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 c6 6. Qc2 Be7 7. e3 Nbd7 8. Bd3 O-O 9. Nge2 Re8 10. O-O Nf8 *
+
+[Event "Queen's Gambit Declined"]
+[Round "34"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nc3, cxd5, Bg5, Nf3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bg5 c6 6. Nf3 Be7 7. e3 Bf5 8. Bd3 Bxd3 9. Qxd3 Nbd7 10. O-O O-O *
+
+[Event "Queen's Gambit Declined"]
+[Round "35"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Normal Defense: Nc3, e3, Bd3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. e3 Be7 5. Bd3 O-O 6. Nge2 b6 7. O-O Bb7 8. f3 c5 9. cxd5 Nxd5 10. e4 Nb4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "36"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Nc3, Bg5, e3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. cxd5 exd5 7. Bd3 Nbd7 8. Nge2 Re8 9. O-O Nf8 10. Qc2 c6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "37"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: Nc3, cxd5, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. Bf4 Bd6 6. Bxd6 Qxd6 7. e3 Bf5 8. Nf3 O-O 9. Bd3 Bxd3 10. Qxd3 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "38"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: e3, c5"]
+
+1. d4 d5 2. c4 e6 3. e3 Nf6 4. c5 b6 5. b4 a5 6. Bd2 axb4 7. Bxb4 bxc5 8. dxc5 Ne4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "39"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: Nc3, cxd5, e3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. e3 c6 6. Nf3 Bd6 7. Bd3 O-O 8. O-O Bg4 9. h3 Bh5 10. Be2 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "40"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Nf3, Bf4, e3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. cxd5 Nxd5 8. Nxd5 exd5 9. Bd3 c5 10. O-O c4 *
+
+[Event "Queen's Gambit Declined"]
+[Round "41"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Bg5, e3, Nf3, Bh4, Be2"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 8. Be2 Bb7 9. O-O Nbd7 10. Rc1 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "42"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: Nc3, cxd5, g3, Bg2"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. cxd5 exd5 5. g3 c6 6. Bg2 Bd6 7. Nf3 O-O 8. O-O Re8 9. Bg5 h6 10. Bxf6 Qxf6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "43"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Bg5, e3, Nf3, Bh4, Rc1"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bh4 b6 8. Rc1 Bb7 9. cxd5 Nxd5 10. Bxe7 Qxe7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "44"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Nf3, Bf4, e3, Be2"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. Be2 dxc4 8. Bxc4 a6 9. O-O b5 10. Bd3 Bb7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "45"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: cxd5, e3"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. e3 Nf6 5. Nc3 c6 6. Nf3 Bd6 7. Bd3 O-O 8. O-O Bg4 9. h3 Bh5 10. Be2 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "46"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense, Blockade Line: Nc3, Nf3, Bf4, e3, c5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. c5 Nh5 8. Bg3 Nxg3 9. hxg3 c6 10. Bd3 g6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "47"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Neo-Orthodox Variation: Nc3, Nf3, Bg5, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bf4 O-O 7. e3 c5 8. cxd5 Nxd5 9. Nxd5 Qxd5 10. dxc5 Qxc5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "48"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: Nc3, e3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. e3 Be7 5. cxd5 exd5 6. Nf3 O-O 7. Bd3 c6 8. O-O Bg4 9. h3 Bh5 10. Be2 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "49"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: cxd5, Nc3, g3, Bg2"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nc3 c6 5. g3 Nf6 6. Bg2 Bd6 7. Nf3 O-O 8. O-O Re8 9. Bg5 h6 10. Bxf6 Qxf6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "50"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nf3, Nc3, g3"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Be7 5. g3 O-O 6. Bg2 dxc4 7. O-O Nc6 8. e4 Rb8 9. a4 a6 10. d5 exd5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "51"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Nf3, Bg5, Bh4, e3, Be2"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. Be2 Bb7 9. O-O Nbd7 10. Rc1 c5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "52"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Neo-Orthodox Variation: Nc3, Bg5, Nf3, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. Nf3 h6 6. Bf4 O-O 7. e3 c5 8. cxd5 Nxd5 9. Nxd5 Qxd5 10. dxc5 Qxc5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "53"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Three Knights Variation: Nf3, Nc3, cxd5"]
+
+1. d4 d5 2. c4 e6 3. Nf3 Nf6 4. Nc3 Be7 5. cxd5 exd5 6. Bg5 c6 7. e3 Bf5 8. Bd3 Bxd3 9. Qxd3 Nbd7 10. O-O O-O *
+
+[Event "Queen's Gambit Declined"]
+[Round "54"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Neo-Orthodox Variation: Nc3, Bg5, e3, Nf3, Bf4"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Bg5 Be7 5. e3 O-O 6. Nf3 h6 7. Bf4 c5 8. cxd5 Nxd5 9. Nxd5 Qxd5 10. dxc5 Qxc5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "55"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Tartakower Defense: Nc3, Nf3, Bg5, Bh4, e3, Rc1"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bg5 h6 6. Bh4 O-O 7. e3 b6 8. Rc1 Bb7 9. cxd5 Nxd5 10. Bxe7 Qxe7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "56"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Exchange Variation: cxd5, Nc3, e3"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nc3 c6 5. e3 Nf6 6. Nf3 Bd6 7. Bd3 O-O 8. O-O Bg4 9. h3 Bh5 10. Be2 Nbd7 *
+
+[Event "Queen's Gambit Declined"]
+[Round "57"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Nf3, Bf4, e3, h3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. h3 c5 8. cxd5 Nxd5 9. Nxd5 exd5 10. dxc5 Nxc5 *
+
+[Event "Queen's Gambit Declined"]
+[Round "58"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: cxd5, Nc3, e4, Nxe4"]
+
+1. d4 d5 2. c4 e6 3. cxd5 exd5 4. Nc3 c6 5. e4 dxe4 6. Nxe4 Nf6 7. Nxf6+ Qxf6 8. Nf3 Bb4+ 9. Bd2 Bxd2+ 10. Qxd2 O-O *
+
+[Event "Queen's Gambit Declined"]
+[Round "59"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack: Nc3, Nf3, Bf4, h3"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. h3 c5 7. e3 Nc6 8. Be2 cxd4 9. exd4 dxc4 10. Bxc4 a6 *
+
+[Event "Queen's Gambit Declined"]
+[Round "60"]
+[White "Opponent"]
+[Black "You"]
+[Result "*"]
+[Opening "Queen's Gambit Declined: Harrwitz Attack, Two Knights Defense: Nc3, Nf3, Bf4, e3, Rc1"]
+
+1. d4 d5 2. c4 e6 3. Nc3 Nf6 4. Nf3 Be7 5. Bf4 O-O 6. e3 Nbd7 7. Rc1 c5 8. cxd5 Nxd5 9. Nxd5 exd5 10. dxc5 Nxc5 *

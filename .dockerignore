@@ -1,0 +1,6 @@
+**/node_modules
+**/dist
+.git
+**/.env
+.explorer-cache
+server/src/generated

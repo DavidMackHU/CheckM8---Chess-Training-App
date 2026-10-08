@@ -1,0 +1,539 @@
+[Event "Italian Game"]
+[Round "1"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Paris Defense: ...d6, ...exd4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 Nf6 7. Nc3 Be7 8. O-O O-O 9. Bg5 h6 10. Bh4 *
+
+[Event "Italian Game"]
+[Round "2"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 d5 5. exd5 Nxd5 6. O-O Bg4 7. h3 Bh5 8. Re1 f6 9. d4 Nxd4 10. Qxd4 *
+
+[Event "Italian Game"]
+[Round "3"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...Be7, ...O-O"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Be7 5. O-O O-O 6. Re1 d6 7. a4 Bg4 8. h3 Bh5 9. c3 a6 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "4"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...h6, ...Bc5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 h6 5. O-O Bc5 6. c3 d6 7. Re1 Bg4 8. Nbd2 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "5"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d6, ...Bg4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O Bg4 7. Nbd2 O-O 8. h3 Bh5 9. Re1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "6"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...O-O, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 O-O 6. O-O d6 7. Re1 Bg4 8. Nbd2 a6 9. Bb3 b5 10. Nf1 *
+
+[Event "Italian Game"]
+[Round "7"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 d6 5. Ng5 d5 6. exd5 Nxd5 7. Nxf7 Kxf7 8. Qf3+ Ke6 9. Nc3 Ne7 10. Bg5 *
+
+[Event "Italian Game"]
+[Round "8"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...exd4, ...Bb4+, ...Bg4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 Bg4 8. O-O Nf6 9. d5 Ne5 10. Qa4+ *
+
+[Event "Italian Game"]
+[Round "9"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Paris Defense: ...d6, ...Bg4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. d4 Bg4 5. c3 exd4 6. cxd4 Nf6 7. Nc3 Be7 8. Be3 O-O 9. h3 Bh5 10. O-O *
+
+[Event "Italian Game"]
+[Round "10"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Nxd4, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 d6 7. Nc3 Nf6 8. O-O Be7 9. Bf4 O-O 10. Rad1 *
+
+[Event "Italian Game"]
+[Round "11"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...h6, ...exd4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 h6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 d6 8. O-O Bg4 9. h3 Bh5 10. g4 *
+
+[Event "Italian Game"]
+[Round "12"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d6, ...Bg4"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d6 6. O-O Bg4 7. Nbd2 O-O 8. h3 Bh5 9. Re1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "13"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...O-O, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 O-O 6. O-O d6 7. Re1 Bg4 8. Nbd2 a6 9. Bb3 b5 10. Nf1 *
+
+[Event "Italian Game"]
+[Round "14"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, La Bourdonnais Variation: ...Bc5, ...d6, ...exd4, ...Bb6, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6 7. h3 h6 8. Nc3 Nf6 9. O-O O-O 10. Re1 *
+
+[Event "Italian Game"]
+[Round "15"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...h6, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 h6 6. O-O d6 7. Re1 Bg4 8. Nbd2 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "16"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...h6, ...O-O"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 h6 6. O-O O-O 7. Re1 d6 8. h3 Be6 9. Bb5 a6 10. Ba4 *
+
+[Event "Italian Game"]
+[Round "17"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Bc5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Bc5 6. Nxc6 bxc6 7. O-O d6 8. Nc3 Nf6 9. h3 O-O 10. Qf3 *
+
+[Event "Italian Game"]
+[Round "18"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 d6 5. dxe5 dxe5 6. Qxd8+ Kxd8 7. Bxf7 Nf6 8. Nc3 Bb4 9. Bd5 Bxc3+ 10. bxc3 *
+
+[Event "Italian Game"]
+[Round "19"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, La Bourdonnais Variation: ...Bc5, ...d6, ...exd4, ...Bb6, ...Nf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6 7. h3 Nf6 8. Nc3 O-O 9. O-O h6 10. Re1 *
+
+[Event "Italian Game"]
+[Round "20"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d6, ...O-O"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O O-O 7. Re1 Bg4 8. Nbd2 a6 9. Bb3 b5 10. Nf1 *
+
+[Event "Italian Game"]
+[Round "21"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...O-O, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 O-O 6. O-O h6 7. Re1 d6 8. h3 Be6 9. Bb5 a6 10. Ba4 *
+
+[Event "Italian Game"]
+[Round "22"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d6, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O h6 7. Re1 Bg4 8. Nbd2 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "23"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...O-O, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 O-O 6. O-O d5 7. exd5 Nxd5 8. Re1 Bg4 9. h3 Bh5 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "24"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...h6, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 h6 6. O-O d6 7. Re1 Bg4 8. Nbd2 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "25"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Ne5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Ne5 6. Bb3 Nf6 7. Nc3 Bb4 8. O-O Bxc3 9. bxc3 O-O 10. f4 *
+
+[Event "Italian Game"]
+[Round "26"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d5 6. exd5 Nxd5 7. O-O O-O 8. Re1 Bg4 9. h3 Bh5 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "27"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...Be7, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Be7 5. O-O d6 6. c3 O-O 7. Bb3 Bg4 8. h3 Bh5 9. Re1 h6 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "28"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...h6, ...O-O"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 h6 6. O-O O-O 7. Re1 d6 8. h3 Be6 9. Bb5 a6 10. Ba4 *
+
+[Event "Italian Game"]
+[Round "29"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...exd4, ...Bb4+, ...Nf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 Nf6 8. O-O O-O 9. Bg5 h6 10. Bh4 *
+
+[Event "Italian Game"]
+[Round "30"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Nxd4, ...Nf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 Nf6 7. e5 Qe7 8. O-O Nh7 9. Nc3 c6 10. Ne4 *
+
+[Event "Italian Game"]
+[Round "31"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d6, ...O-O"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d6 6. O-O O-O 7. Re1 Bg4 8. Nbd2 a6 9. Bb3 b5 10. Nf1 *
+
+[Event "Italian Game"]
+[Round "32"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...O-O, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 O-O 6. O-O h6 7. Re1 d6 8. h3 Be6 9. Bb5 a6 10. Ba4 *
+
+[Event "Italian Game"]
+[Round "33"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d6, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d6 6. O-O h6 7. Re1 Bg4 8. Nbd2 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "34"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Nf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Nf6 6. Nc3 Nxd4 7. Qxd4 d6 8. O-O Be7 9. Bf4 O-O 10. Rad1 *
+
+[Event "Italian Game"]
+[Round "35"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...O-O, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 O-O 6. O-O d5 7. exd5 Nxd5 8. Re1 Bg4 9. h3 Bh5 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "36"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d5 6. exd5 Nxd5 7. O-O O-O 8. Re1 Bg4 9. h3 Bh5 10. Nbd2 *
+
+[Event "Italian Game"]
+[Round "37"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Nxd4, ...Qf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 Qf6 7. e5 Qb6 8. Qf4 Qg6 9. O-O Bc5 10. Nc3 *
+
+[Event "Italian Game"]
+[Round "38"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Qf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Qf6 6. Be3 Bc5 7. c3 Nge7 8. O-O O-O 9. Nxc6 Qxc6 10. Bxc5 *
+
+[Event "Italian Game"]
+[Round "39"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d6, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O a6 7. a4 Ba7 8. Re1 h6 9. Nbd2 O-O 10. h3 *
+
+[Event "Italian Game"]
+[Round "40"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...exd4, ...Bb4+, ...Bxc3+"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 Bxc3+ 8. bxc3 Bg4 9. h3 Bh5 10. O-O *
+
+[Event "Italian Game"]
+[Round "41"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...O-O, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 O-O 6. O-O a6 7. d4 exd4 8. cxd4 Ba7 9. e5 Ne8 10. d5 *
+
+[Event "Italian Game"]
+[Round "42"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...Nxd4, ...c5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 Nxd4 6. Qxd4 c5 7. Qd3 d6 8. Nc3 Nf6 9. Bf4 Be7 10. O-O-O *
+
+[Event "Italian Game"]
+[Round "43"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...h6, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 h6 5. O-O d6 6. c3 Bg4 7. Nbd2 Be7 8. Re1 O-O 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "44"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...Bb6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 Bb6 6. dxe5 dxe5 7. Qxd8+ Kxd8 8. Bxf7 Nf6 9. Bg5 Ke7 10. Bd5 *
+
+[Event "Italian Game"]
+[Round "45"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, La Bourdonnais Variation: ...Bc5, ...d6, ...exd4, ...Bb6, ...Nge7"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb6 7. h3 Nge7 8. Nc3 O-O 9. O-O Kh8 10. Ng5 *
+
+[Event "Italian Game"]
+[Round "46"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...h6, ...exd4, ...d6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 h6 4. d4 exd4 5. Nxd4 d6 6. O-O Nxd4 7. Qxd4 Nf6 8. Nc3 Be7 9. Bf4 O-O 10. Rad1 *
+
+[Event "Italian Game"]
+[Round "47"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...d6, ...Be6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 d6 6. O-O Be6 7. Nbd2 O-O 8. Bb5 a6 9. Ba4 b5 10. Bc2 *
+
+[Event "Italian Game"]
+[Round "48"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d6, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d6 6. O-O a6 7. a4 Ba7 8. Re1 h6 9. Nbd2 O-O 10. h3 *
+
+[Event "Italian Game"]
+[Round "49"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...O-O, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 O-O 6. O-O a6 7. d4 exd4 8. cxd4 Ba7 9. e5 Ne8 10. d5 *
+
+[Event "Italian Game"]
+[Round "50"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Anti-Fried Liver Defense: ...d6, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. d4 h6 5. dxe5 dxe5 6. Qxd8+ Kxd8 7. Bxf7 Nf6 8. Nc3 Bb4 9. Bd5 Bxc3+ 10. bxc3 *
+
+[Event "Italian Game"]
+[Round "51"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...d6, ...Be6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 d6 6. O-O Be6 7. Nbd2 O-O 8. Bb5 a6 9. Ba4 b5 10. Bc2 *
+
+[Event "Italian Game"]
+[Round "52"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...h6, ...Be7"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 h6 5. O-O Be7 6. c3 O-O 7. Re1 d6 8. Nbd2 Bg4 9. Nf1 a6 10. Bb3 *
+
+[Event "Italian Game"]
+[Round "53"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Scotch Invitation Declined: ...d6, ...Nf6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. d4 Nf6 5. dxe5 dxe5 6. Qxd8+ Nxd8 7. Nxe5 Be6 8. Bxe6 Nxe6 9. f3 Bd6 10. Nc4 *
+
+[Event "Italian Game"]
+[Round "54"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Paris Defense: ...d6, ...Be7"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 d6 4. d4 Be7 5. dxe5 Nxe5 6. Nxe5 dxe5 7. Qh5 g6 8. Qxe5 Nf6 9. Bh6 Qd6 10. Qxd6 *
+
+[Event "Italian Game"]
+[Round "55"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...h6, ...d5, ...Nxd5"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 h6 5. O-O d5 6. exd5 Nxd5 7. Re1 f6 8. d4 Nb6 9. Bb5 Bd7 10. dxe5 *
+
+[Event "Italian Game"]
+[Round "56"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Bc5, ...Nf6, ...h6, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 Nf6 5. d3 h6 6. O-O a6 7. a4 d6 8. Re1 O-O 9. h3 Be6 10. Bxe6 *
+
+[Event "Italian Game"]
+[Round "57"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...exd4, ...Bb4+, ...Nge7"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 Nge7 8. O-O O-O 9. h3 Ng6 10. Bg5 *
+
+[Event "Italian Game"]
+[Round "58"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation: ...Bc5, ...d6, ...exd4, ...Bb4+, ...h6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Bc5 4. c3 d6 5. d4 exd4 6. cxd4 Bb4+ 7. Nc3 h6 8. O-O Bg4 9. h3 Bh5 10. g4 *
+
+[Event "Italian Game"]
+[Round "59"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Two Knights Defense, Modern Bishop's Opening: ...Nf6, ...h6, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 h6 5. O-O a6 6. c3 Bc5 7. a4 d6 8. Nbd2 O-O 9. Re1 Bg4 10. Nf1 *
+
+[Event "Italian Game"]
+[Round "60"]
+[White "You"]
+[Black "Opponent"]
+[Result "*"]
+[Opening "Italian Game: Classical Variation, Giuoco Pianissimo: ...Nf6, ...Bc5, ...h6, ...a6"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bc4 Nf6 4. d3 Bc5 5. c3 h6 6. O-O a6 7. a4 d6 8. Re1 O-O 9. h3 Be6 10. Bxe6 *

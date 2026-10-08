@@ -1,0 +1,156 @@
+// Database schema. After editing, run: npm run db:push
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  username       String    @unique
+  passwordHash   String
+  xp             Int       @default(0)
+  streak         Int       @default(0)
+  lastActiveDate DateTime?
+  dailyNewLimit  Int       @default(5)
+  createdAt      DateTime  @default(now())
+  courses        Course[]
+  enrollments    Enrollment[]
+  cards          Card[]
+  reviews        ReviewLog[]
+  upvotes        CourseUpvote[]
+}
+
+enum Side {
+  WHITE
+  BLACK
+}
+
+enum Difficulty {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum CourseSource {
+  GENERATED
+  PGN
+  MANUAL
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  pitch       String       @default("")
+  description String       @default("")
+  side        Side
+  difficulty  Difficulty   @default(BEGINNER)
+  keyMoves    String[]
+  /// White's first move in SAN ("e4", "d4", ...). Drives the catalog filter.
+  firstMove   String       @default("")
+  keyFen      String
+  startFen    String
+  source      CourseSource @default(GENERATED)
+  authorId    String?
+  author      User?        @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  isOfficial  Boolean      @default(false)
+  isPublic    Boolean      @default(false)
+  upvotes     Int          @default(0)
+  createdAt   DateTime     @default(now())
+  lines       Line[]
+  enrollments Enrollment[]
+  upvotedBy   CourseUpvote[]
+  /// Set the first time the course is published. Orders the "newest" community list.
+  publishedAt DateTime?
+
+  @@index([isPublic, isOfficial])
+}
+
+model Line {
+  id       String @id @default(cuid())
+  courseId String
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  order    Int
+  name     String
+  moves    String[]
+  comments Json   @default("{}")
+  finalFen String
+  cards    Card[]
+  reviews  ReviewLog[]
+
+  @@unique([courseId, order])
+}
+
+model Enrollment {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, courseId])
+}
+
+model Card {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lineId        String
+  line          Line      @relation(fields: [lineId], references: [id], onDelete: Cascade)
+  due           DateTime
+  stability     Float     @default(0)
+  difficulty    Float     @default(0)
+  elapsedDays   Int       @default(0)
+  scheduledDays Int       @default(0)
+  learningSteps Int       @default(0)
+  reps          Int       @default(0)
+  lapses        Int       @default(0)
+  state         Int       @default(0)
+  lastReview    DateTime?
+  /// When the line was first learned. Used for the daily new-line limit.
+  createdAt     DateTime  @default(now())
+
+  @@unique([userId, lineId])
+  @@index([userId, due])
+}
+
+model ReviewLog {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lineId     String
+  line       Line     @relation(fields: [lineId], references: [id], onDelete: Cascade)
+  rating     Int
+  mistakes   Int
+  avgMs      Int
+  xpEarned   Int
+  reviewedAt DateTime @default(now())
+
+  @@index([userId, reviewedAt])
+}
+
+model ExplorerCache {
+  fen          String
+  ratingBucket String
+  json         Json
+  fetchedAt    DateTime @default(now())
+
+  @@id([fen, ratingBucket])
+}
+
+/// One row per user per course, so nobody can upvote twice. Course.upvotes caches the count.
+model CourseUpvote {
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  courseId  String
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, courseId])
+}

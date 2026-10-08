@@ -1,0 +1,51 @@
+# Local development:   docker compose up -d db     then  npm run dev
+# Full stack in Docker: docker compose --profile full up --build   then open http://localhost:8080
+# After any schema change, create the tables with: npm run db:push
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: openingdrill
+      POSTGRES_PASSWORD: openingdrill
+      POSTGRES_DB: openingdrill
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U openingdrill -d openingdrill"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  server:
+    profiles: ["full"]
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    # Picks up LICHESS_TOKEN (Human moves mode) if server/.env exists. The values below win over the file.
+    env_file:
+      - path: server/.env
+        required: false
+    environment:
+      PORT: "3001"
+      # Local-only values. Real deployments set their own secret and use HTTPS.
+      JWT_SECRET: local-docker-only-secret-change-me
+      COOKIE_SECURE: "false"
+      DATABASE_URL: postgresql://openingdrill:openingdrill@db:5432/openingdrill?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    profiles: ["full"]
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
