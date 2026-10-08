@@ -26,6 +26,14 @@ services:
       # Lichess personal token (no scopes). Entered in the dashboard.
       - key: LICHESS_TOKEN
         sync: false
+      # "Continue with Google". All three are entered in the dashboard.
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      # The site's address as visitors see it, e.g. https://your-site.vercel.app
+      - key: PUBLIC_URL
+        sync: false
       # Proxies between the visitor and the API: Vercel, then Render's own.
       - key: TRUST_PROXY
         value: "3"

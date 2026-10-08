@@ -30,13 +30,27 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 950 }, channel: process.env.PW_CHANNEL },
     },
   ],
-  webServer: {
-    command: 'npm run dev',
-    // Goes through the client's proxy, so it only answers once both servers are up.
-    url: 'http://localhost:5173/api/health',
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-    // The tests sign up many accounts quickly; lift the sign-up rate limit for this run.
-    env: { AUTH_RATE_LIMIT: '100000' },
-  },
+  webServer: [
+    {
+      command: 'npm run dev',
+      // Goes through the client's proxy, so it only answers once both servers are up.
+      url: 'http://localhost:5173/api/health',
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+      env: {
+        // The tests sign up many accounts quickly; lift the sign-up rate limit for this run.
+        AUTH_RATE_LIMIT: '100000',
+        // Google sign-in is pointed at e2e/fake-google.mjs. These are not real credentials.
+        GOOGLE_CLIENT_ID: 'e2e-client-id',
+        GOOGLE_CLIENT_SECRET: 'e2e-client-secret',
+        GOOGLE_TOKEN_URL: 'http://localhost:5999/token',
+        PUBLIC_URL: 'http://localhost:5173',
+      },
+    },
+    {
+      command: 'node e2e/fake-google.mjs',
+      url: 'http://localhost:5999',
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 })

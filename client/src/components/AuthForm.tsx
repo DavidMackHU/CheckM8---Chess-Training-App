@@ -1,6 +1,7 @@
 import { type FormEvent, useState } from 'react'
-import { Link, useNavigate } from 'react-router'
-import { useLogin, useRegister } from '../lib/auth.ts'
+import { Link, useNavigate, useSearchParams } from 'react-router'
+import { useAuthProviders, useLogin, useRegister } from '../lib/auth.ts'
+import GoogleButton from './GoogleButton.tsx'
 
 type Props = { mode: 'login' | 'signup' }
 
@@ -13,6 +14,9 @@ export default function AuthForm({ mode }: Props) {
   const register = useRegister()
   const mutation = isSignup ? register : login
   const navigate = useNavigate()
+  const { data: providers } = useAuthProviders()
+  // Set when a Google sign-in was sent back here without succeeding.
+  const googleError = useSearchParams()[0].get('error')?.startsWith('google_') ?? false
 
   const [email, setEmail] = useState('')
   const [username, setUsername] = useState('')
@@ -27,6 +31,13 @@ export default function AuthForm({ mode }: Props) {
   return (
     <form onSubmit={onSubmit} className="flex w-full max-w-sm flex-col gap-4">
       <h1 className="text-2xl font-semibold">{isSignup ? 'Create your account' : 'Log in'}</h1>
+
+      {providers?.google && <GoogleButton />}
+      {googleError && !mutation.isError && (
+        <p role="alert" className="text-sm text-red-400">
+          Google sign-in did not complete. Try again, or use your email and password.
+        </p>
+      )}
 
       <label className="flex flex-col gap-1 text-sm">
         Email

@@ -4,6 +4,7 @@ import { authRouter } from './routes/auth.js'
 import { coursesRouter } from './routes/courses.js'
 import { creatorRouter } from './routes/creator.js'
 import { explorerRouter } from './routes/explorer.js'
+import { googleRouter } from './routes/google.js'
 import { healthRouter } from './routes/health.js'
 import { leaderboardsRouter } from './routes/leaderboards.js'
 import { statsRouter } from './routes/stats.js'
@@ -18,6 +19,7 @@ export function createApp() {
 
   app.use('/api', healthRouter)
   app.use('/api/auth', authRouter)
+  app.use('/api/auth', googleRouter)
   app.use('/api/courses', coursesRouter)
   app.use('/api/train', trainRouter)
   app.use('/api/creator', creatorRouter)

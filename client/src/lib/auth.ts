@@ -43,6 +43,16 @@ function useAuthMutation(path: '/auth/login' | '/auth/register') {
 export const useLogin = () => useAuthMutation('/auth/login')
 export const useRegister = () => useAuthMutation('/auth/register')
 
+/** Which extra sign-in methods the server has been set up for. */
+export function useAuthProviders() {
+  return useQuery({
+    queryKey: ['auth', 'providers'],
+    queryFn: () => apiGet<{ google: boolean }>('/auth/providers'),
+    staleTime: Infinity,
+    retry: false,
+  })
+}
+
 export function useLogout() {
   const queryClient = useQueryClient()
   return useMutation({

@@ -53,7 +53,8 @@ authRouter.post('/login', limiter, async (req, res) => {
     return
   }
   const user = await prisma.user.findUnique({ where: { email: parsed.data.email } })
-  const valid = user ? await bcrypt.compare(parsed.data.password, user.passwordHash) : false
+  // Google-only accounts have no password, so they can never match here.
+  const valid = user?.passwordHash ? await bcrypt.compare(parsed.data.password, user.passwordHash) : false
   if (!user || !valid) {
     res.status(401).json({ error: 'Wrong email or password.' })
     return
