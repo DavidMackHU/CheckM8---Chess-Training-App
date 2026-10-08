@@ -58,8 +58,12 @@ test('a guest can play the first line and is then invited to sign up', async ({ 
   await page.goto('/course/caro-kann')
   await page.getByRole('link', { name: 'Try the first line' }).click()
   await expect(page.getByTestId('drill')).toBeVisible()
-  // Black course: the opponent opens, and the prompt names our reply.
-  await expect(page.getByTestId('drill-prompt')).toHaveText(`Your move: 1... ${line.moves[1]}`)
+  // Black course: the opponent opens. Our reply stays hidden until we ask for a hint.
+  await expect(page.getByTestId('drill-prompt')).toHaveText('Your move. What do you play here?')
+  await expect(page.locator('[data-testid=board] svg [marker-end]')).toHaveCount(0)
+  await page.getByTestId('hint-button').click()
+  await expect(page.getByTestId('drill-prompt')).toHaveText(`The move is 1... ${line.moves[1]}. Play it to continue.`)
+  await expect(page.getByTestId('hint-button')).toHaveCount(0)
 
   await playDrillLine(page, line.moves, 'BLACK')
   await expect(page.getByTestId('line-summary')).toContainText('First line done!')

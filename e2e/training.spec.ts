@@ -26,12 +26,19 @@ test('learn mode: hints, a wrong move, comments, and a saved session', async ({ 
   await page.getByRole('link', { name: 'Learn new lines' }).click()
 
   await expect(page.getByTestId('session-progress')).toHaveText('New line 1 of 3')
-  await expect(page.getByTestId('drill-prompt')).toHaveText('Your move: 1. d4')
-  await expect(page.getByTestId('drill-comment')).toHaveText('Claim the centre.')
+  // Nothing gives the move away until a hint is asked for.
+  await expect(page.getByTestId('drill-prompt')).toHaveText('Your move. What do you play here?')
+  await expect(page.getByTestId('drill-comment')).toHaveCount(0)
 
   await clickMove(page, 'e2', 'e4') // wrong
   await expect(page.getByTestId('drill')).toHaveAttribute('data-ply', '0')
-  await expect(page.getByTestId('drill-wrong')).toBeVisible()
+  await expect(page.getByTestId('drill-wrong')).toHaveText('Not that one. Try again, or ask for a hint.')
+  await expect(page.getByTestId('drill-prompt')).toHaveText('Your move. What do you play here?')
+
+  await page.getByTestId('hint-button').click()
+  await expect(page.getByTestId('drill-prompt')).toHaveText('The move is 1. d4. Play it to continue.')
+  await expect(page.getByTestId('drill-comment')).toHaveText('Claim the centre.')
+  await expect(page.getByTestId('drill')).toHaveAttribute('data-mistakes', '1') // a hint is free while learning
 
   await playDrillLine(page, SMALL_LINES.nf6, 'WHITE')
   const summary = page.getByTestId('line-summary')
@@ -91,8 +98,10 @@ test('review mode: no hints, a miss reveals the move, grades and XP are saved', 
   await page.getByRole('button', { name: 'Next line' }).click()
   await expect(page.getByTestId('session-progress')).toHaveText('Line 2 of 2')
   await clickMove(page, 'e2', 'e4')
-  await expect(page.getByTestId('drill-prompt')).toHaveText('The move was 1. d4. Play it to continue.')
+  await expect(page.getByTestId('drill-prompt')).toHaveText('Your move. What do you play here?') // still hidden
   await clickMove(page, 'g1', 'f3') // a second miss on the same move still counts once
+  await page.getByTestId('hint-button').click() // and so does the hint after it
+  await expect(page.getByTestId('drill-prompt')).toHaveText('The move is 1. d4. Play it to continue.')
   await expect(page.getByTestId('drill')).toHaveAttribute('data-mistakes', '1')
   await playDrillLine(page, course.lines[1].moves, 'WHITE')
   await expect(page.getByTestId('line-summary')).toContainText('Review complete!')

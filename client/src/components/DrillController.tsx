@@ -13,8 +13,8 @@ type Props = {
   side: Side
   startFen: string
   /**
-   * learn:  the next move is shown with an arrow and the author's comment.
-   * review: no hints. The user plays from memory; a wrong move reveals the answer.
+   * learn:  a hint (arrow, move and the author's comment) is free.
+   * review: a hint counts as a mistake, like a wrong move.
    */
   mode: 'learn' | 'review'
   /** Called once, when the last move of the line has been played. */
@@ -39,6 +39,8 @@ export default function DrillController({ line, side, startFen, mode, onComplete
   // Counted once per move, however many wrong tries it took.
   const [mistakes, setMistakes] = useState(0)
   const [wrong, setWrong] = useState(false)
+  // True once the user asks for a hint on the current move.
+  const [revealed, setRevealed] = useState(false)
   const [startedAt] = useState(() => Date.now())
   const reported = useRef(false)
   // Thinking time for each move the user got right first try (review grading uses these).
@@ -92,26 +94,33 @@ export default function DrillController({ line, side, startFen, mode, onComplete
       playSound('wrong')
       return false
     }
-    if (!wrong) moveTimes.current.push(Date.now() - turnStartedAt.current)
+    if (!wrong && !revealed) moveTimes.current.push(Date.now() - turnStartedAt.current)
     setWrong(false)
+    setRevealed(false)
     const outcome = move(input)
     if (outcome) playSound(soundForMove(outcome))
     return outcome !== null
   }
 
   const isLearn = mode === 'learn'
-  // Learn mode always shows the answer. Review mode shows it only after a wrong try.
-  const showAnswer = isUserTurn && expected !== null && (isLearn || wrong)
+
+  function onHint() {
+    // In a review, needing the hint means the move was not remembered.
+    if (!isLearn && !wrong) setMistakes((m) => m + 1)
+    setRevealed(true)
+  }
+
+  // The answer stays hidden in both modes until the user asks for a hint.
+  const showAnswer = isUserTurn && expected !== null && revealed
   const hint = showAnswer && expected ? squaresFor(game.fen, expected) : null
-  // Learn: on the user's turn show the note for the move they are about to play.
-  // Review: never show a note ahead of the move, since it would give the answer away.
-  const comment = line.comments[String(isLearn && isUserTurn ? ply + 1 : ply)]
+  // Learn: once the answer is shown, also show the note that explains it.
+  // Otherwise only the note for the move just played, which gives nothing away.
+  const comment = line.comments[String(isLearn && showAnswer ? ply + 1 : ply)]
 
   let prompt = 'Opponent is moving...'
   if (done) prompt = 'Line complete.'
   else if (isUserTurn && expected) {
-    if (isLearn) prompt = `Your move: ${numbered(ply, expected)}`
-    else prompt = wrong ? `The move was ${numbered(ply, expected)}. Play it to continue.` : 'Your move. What do you play here?'
+    prompt = showAnswer ? `The move is ${numbered(ply, expected)}. Play it to continue.` : 'Your move. What do you play here?'
   }
 
   return (
@@ -145,7 +154,8 @@ export default function DrillController({ line, side, startFen, mode, onComplete
           prompt={prompt}
           comment={comment}
           wrong={wrong && isUserTurn}
-          wrongText={isLearn ? 'Not that one. Follow the arrow.' : 'Not that one. The arrow shows the move.'}
+          wrongText={showAnswer ? 'Not that one. The arrow shows the move.' : 'Not that one. Try again, or ask for a hint.'}
+          onHint={isUserTurn && !showAnswer ? onHint : undefined}
         />
         <div
           className="h-1.5 overflow-hidden rounded-full bg-slate-800"

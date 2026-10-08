@@ -147,7 +147,7 @@ function Session({ queue }: { queue: ReviewQueue }) {
   )
 }
 
-/** Review mode at /train/review: every due line, from memory, no hints. */
+/** Review mode at /train/review: every due line, from memory. A hint counts as a miss. */
 export default function Review() {
   const { data, isPending, error } = useReviewQueue()
 

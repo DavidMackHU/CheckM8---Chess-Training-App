@@ -39,6 +39,8 @@ export default function HumanDrill({ lines, side, startFen, bucket, mayLeavePrep
   const game = useChessGame(startFen)
   const [mistakes, setMistakes] = useState(0)
   const [wrong, setWrong] = useState(false)
+  // True once the user asks for a hint on the current move.
+  const [revealed, setRevealed] = useState(false)
   const [note, setNote] = useState<string | null>(null)
   const [noData, setNoData] = useState(false)
   const [leftPrep, setLeftPrep] = useState(false)
@@ -100,17 +102,24 @@ export default function HumanDrill({ lines, side, startFen, bucket, mayLeavePrep
       return false
     }
     setWrong(false)
+    setRevealed(false)
     const outcome = move(input)
     if (outcome) playSound(soundForMove(outcome))
     return outcome !== null
   }
 
   const answer = replies[0]
-  const hint = wrong && isUserTurn && answer ? squaresFor(fen, answer) : null
+  // The answer stays hidden until the user asks for a hint, which counts as a mistake.
+  const showAnswer = revealed && isUserTurn && !done && answer !== undefined
+  const hint = showAnswer ? squaresFor(fen, answer) : null
+  function onHint() {
+    if (!wrong) setMistakes((m) => m + 1)
+    setRevealed(true)
+  }
   let prompt = 'Opponent is thinking...'
   if (leftPrep) prompt = 'Opponent left your prep.'
   else if (done) prompt = 'End of your prep.'
-  else if (isUserTurn) prompt = wrong ? `Your prep here is ${answer}. Play it to continue.` : 'Your move. What does your prep say?'
+  else if (isUserTurn) prompt = showAnswer ? `Your prep here is ${answer}. Play it to continue.` : 'Your move. What does your prep say?'
 
   return (
     <div
@@ -139,7 +148,8 @@ export default function HumanDrill({ lines, side, startFen, bucket, mayLeavePrep
           prompt={prompt}
           comment={note ?? undefined}
           wrong={wrong && isUserTurn}
-          wrongText="That is not in your course. The arrow shows your prep."
+          wrongText={showAnswer ? 'That is not in your course. The arrow shows your prep.' : 'That is not in your course. Try again, or ask for a hint.'}
+          onHint={isUserTurn && !done && !showAnswer ? onHint : undefined}
         />
         {noData && (
           <p data-testid="no-human-data" className="text-xs text-amber-300">

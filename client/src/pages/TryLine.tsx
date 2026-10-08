@@ -45,7 +45,7 @@ export default function TryLine() {
           </Link>
           <span className="text-slate-500"> · first line</span>
         </h1>
-        <p className="text-sm text-slate-400">Follow the arrows. Play each move on the board.</p>
+        <p className="text-sm text-slate-400">Play each move on the board. Stuck? Ask for a hint.</p>
       </header>
 
       {result ? (
