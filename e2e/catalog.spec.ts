@@ -84,3 +84,35 @@ test('pages do not scroll sideways on a phone', async ({ page }) => {
     expect(overflow, `${path} overflows by ${overflow}px`).toBeLessThanOrEqual(0)
   }
 })
+
+test('on a phone the links fold into a menu', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 800 })
+  await page.goto('/')
+  const leaderboards = page.getByRole('link', { name: 'Leaderboards' })
+  await expect(leaderboards).toBeHidden()
+  await page.getByRole('button', { name: 'Menu' }).click()
+  await expect(leaderboards).toBeVisible()
+  const box = await leaderboards.boundingBox()
+  expect(box!.height).toBeGreaterThanOrEqual(40) // big enough to tap
+  await leaderboards.click()
+  await expect(page).toHaveURL(/\/leaderboards$/)
+  await expect(page.getByRole('link', { name: 'Leaderboards' })).toBeHidden() // closed after following a link
+})
+
+test('a slow server shows a waking-up notice until it answers', async ({ page }) => {
+  await page.route(/\/api\/courses(\?|$)/, async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 5500))
+    await route.continue()
+  })
+  await page.goto('/openings')
+  await expect(page.getByTestId('server-waking')).toBeVisible({ timeout: 8000 })
+  await expect(page.locator(cards).first()).toBeVisible({ timeout: 15000 })
+  await expect(page.getByTestId('server-waking')).toHaveCount(0)
+})
+
+test('the footer credits Stockfish and links its licence', async ({ page }) => {
+  await page.goto('/')
+  const licence = page.getByRole('contentinfo').getByRole('link', { name: 'GNU GPL v3' })
+  await expect(licence).toHaveAttribute('href', '/stockfish/LICENSE.txt')
+  expect((await page.request.get('/stockfish/LICENSE.txt')).status()).toBe(200)
+})

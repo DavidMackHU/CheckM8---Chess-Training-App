@@ -1,65 +1,99 @@
-import { Link } from 'react-router'
+import { useState } from 'react'
+import { NavLink } from 'react-router'
 import { useCurrentUser, useLogout } from '../lib/auth.ts'
 
+const linkClass = ({ isActive }: { isActive: boolean }) =>
+  `block rounded-md px-3 py-2.5 md:p-0 ${isActive ? 'text-white' : 'text-slate-300 hover:text-white'}`
+
+/**
+ * Desktop: one row of links. Phones: the links fold into a menu that opens
+ * below the bar, with large tap targets. Following a link closes it.
+ */
 export default function Navbar() {
   const { data: user, isPending } = useCurrentUser()
   const logout = useLogout()
+  const [open, setOpen] = useState(false)
+  const close = () => setOpen(false)
 
   return (
     <header className="border-b border-slate-800">
-      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3">
-        <Link to="/" className="text-lg font-bold tracking-tight">
+      <nav className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-x-4 px-4 py-3" aria-label="Main">
+        <NavLink to="/" onClick={close} className="text-lg font-bold tracking-tight">
           OpeningDrill
-        </Link>
+        </NavLink>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
-          <Link to="/openings" className="text-slate-300 hover:text-white">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls="nav-links"
+          className="min-h-11 rounded-md border border-slate-700 px-3 text-sm md:hidden"
+        >
+          {open ? 'Close' : 'Menu'}
+        </button>
+
+        <div
+          id="nav-links"
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest('a')) close()
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Escape') close()
+          }}
+          className={`${open ? 'flex' : 'hidden'} w-full flex-col gap-1 pt-3 text-base md:flex md:w-auto md:flex-row md:flex-wrap md:items-center md:gap-x-4 md:gap-y-2 md:pt-0 md:text-sm`}
+        >
+          <NavLink to="/openings" className={linkClass}>
             Openings
-          </Link>
-          <Link to="/community" className="text-slate-300 hover:text-white">
+          </NavLink>
+          <NavLink to="/community" className={linkClass}>
             Community
-          </Link>
-          <Link to="/analysis" className="text-slate-300 hover:text-white">
+          </NavLink>
+          <NavLink to="/analysis" className={linkClass}>
             Analysis
-          </Link>
-          <Link to="/leaderboards" className="text-slate-300 hover:text-white">
+          </NavLink>
+          <NavLink to="/leaderboards" className={linkClass}>
             Leaderboards
-          </Link>
+          </NavLink>
           {isPending ? null : user ? (
             <>
-              <Link to="/dashboard" className="text-slate-300 hover:text-white">
+              <NavLink to="/dashboard" className={linkClass}>
                 Dashboard
-              </Link>
-              <Link to="/train/review" className="text-slate-300 hover:text-white">
+              </NavLink>
+              <NavLink to="/train/review" className={linkClass}>
                 Review
-              </Link>
-              <Link to="/creator/new" className="text-slate-300 hover:text-white">
+              </NavLink>
+              <NavLink to="/creator/new" className={linkClass}>
                 Create
-              </Link>
-              <span data-testid="nav-username" className="max-w-32 truncate text-slate-300">
-                {user.username}
-              </span>
-              <button
-                type="button"
-                onClick={() => logout.mutate()}
-                disabled={logout.isPending}
-                className="rounded-md border border-slate-700 px-3 py-1.5 hover:border-slate-500"
-              >
-                Log out
-              </button>
+              </NavLink>
+              <div className="mt-2 flex items-center justify-between gap-3 border-t border-slate-800 px-3 pt-3 md:mt-0 md:border-0 md:p-0">
+                <span data-testid="nav-username" className="max-w-40 truncate text-slate-300 md:max-w-32">
+                  {user.username}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    close()
+                    logout.mutate()
+                  }}
+                  disabled={logout.isPending}
+                  className="min-h-11 rounded-md border border-slate-700 px-3 hover:border-slate-500 md:min-h-0 md:py-1.5"
+                >
+                  Log out
+                </button>
+              </div>
             </>
           ) : (
-            <>
-              <Link to="/login" className="text-slate-300 hover:text-white">
+            <div className="mt-2 flex items-center gap-3 border-t border-slate-800 px-3 pt-3 md:mt-0 md:border-0 md:p-0">
+              <NavLink to="/login" className="flex min-h-11 items-center text-slate-300 hover:text-white md:min-h-0">
                 Log in
-              </Link>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/signup"
-                className="rounded-md bg-emerald-500 px-3 py-1.5 font-medium text-slate-950 hover:bg-emerald-400"
+                className="flex min-h-11 items-center rounded-md bg-emerald-500 px-4 font-medium text-slate-950 hover:bg-emerald-400 md:min-h-0 md:px-3 md:py-1.5"
               >
                 Sign up
-              </Link>
-            </>
+              </NavLink>
+            </div>
           )}
         </div>
       </nav>

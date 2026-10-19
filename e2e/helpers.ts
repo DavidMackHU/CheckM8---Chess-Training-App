@@ -2,6 +2,7 @@ import { type APIRequestContext, type Browser, expect, type Page } from '@playwr
 import { Chess } from 'chess.js'
 import pg from 'pg'
 import { mintToken } from './fakeFirebase.ts'
+import { BASE_URL } from './ports.ts'
 
 export const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 const DATABASE_URL =
@@ -38,7 +39,7 @@ export async function signUp(page: Page, tag = 'u'): Promise<TestUser> {
 
 /** A second, separately signed-in browser session (or a guest, with `tag` null). */
 export async function newSession(browser: Browser, tag: string | null): Promise<{ page: Page; user: TestUser | null }> {
-  const context = await browser.newContext({ baseURL: 'http://localhost:5173', viewport: { width: 1280, height: 950 } })
+  const context = await browser.newContext({ baseURL: BASE_URL, viewport: { width: 1280, height: 950 } })
   const page = await context.newPage()
   return { page, user: tag ? await signUp(page, tag) : null }
 }

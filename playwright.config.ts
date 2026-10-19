@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
+import { BASE_URL, TEST_API_PORT, TEST_CLIENT_PORT } from './e2e/ports.ts'
 
 /**
  * End-to-end tests. They drive the real app in a browser against the local
@@ -19,9 +20,11 @@ export default defineConfig({
   reporter: process.env.CI ? [['github'], ['html', { open: 'never' }]] : 'list',
   globalTeardown: './e2e/global-teardown.ts',
   use: {
-    baseURL: 'http://localhost:5173',
+    baseURL: BASE_URL,
     trace: 'retain-on-failure',
     viewport: { width: 1280, height: 950 },
+    // Day-based numbers (streak, heatmap) follow the browser's time zone; pin it so dates in tests are predictable.
+    timezoneId: 'UTC',
   },
   projects: [
     {
@@ -34,12 +37,15 @@ export default defineConfig({
     {
       command: 'npm run dev',
       // Goes through the client's proxy, so it only answers once both servers are up.
-      url: 'http://localhost:5173/api/health',
+      url: `${BASE_URL}/api/health`,
       reuseExistingServer: !process.env.CI,
       timeout: 120_000,
       env: {
         // The tests sign up many accounts quickly; lift the sign-up rate limit for this run.
         AUTH_RATE_LIMIT: '100000',
+        // Own ports, so a dev server you already have running is never mistaken for the test one.
+        PORT: String(TEST_API_PORT),
+        CLIENT_PORT: String(TEST_CLIENT_PORT),
         // Sign-in is pointed at e2e/fake-auth.mjs, which plays Firebase. None of these are real.
         FIREBASE_PROJECT_ID: 'e2e-project',
         FIREBASE_JWKS_URL: 'http://localhost:5999/jwks',

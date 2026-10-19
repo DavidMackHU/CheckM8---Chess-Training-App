@@ -31,16 +31,16 @@ Before doing anything else:
 | 7 | Learn mode | ✅ | The move stays hidden until the user taps **Show hint** (arrow, move name, comment). Guests: `/course/:slug/try`. Members: `/train/learn/:courseId`, limited by the daily new-line allowance |
 | 8 | Spaced repetition engine (ts-fsrs) | ✅ | One card per line. Learned lines are due next day; `POST /api/train/result` grades and reschedules. Logic in `server/src/srs/scheduler.ts` |
 | 9 | Review mode (due queue) | ✅ | From memory; a wrong move or a hint counts as a mistake → "Again". A wrong move no longer reveals the answer. `/train/review` serves due lines across all courses, most overdue first, 30 per session |
-| 10 | Progress dashboard | ✅ | Due today, mastered %, streak, heatmap. `/dashboard`, fed by `GET /api/stats/me`. Days are counted in UTC |
+| 10 | Progress dashboard | ✅ | Due today, mastered %, streak, heatmap. `/dashboard`, fed by `GET /api/stats/me`. Days follow the player's own time zone (browser sends `X-Time-Zone`; saved on the user for leaderboard streaks) |
 | 11 | XP, streaks + leaderboards | ✅ | Weekly + all-time at `/leaderboards`. XP: 5 per learned line; review 4/8/10/12 for Again/Hard/Good/Easy. Week resets Monday 00:00 UTC |
 | 12 | Course creator (PGN import + move-tree editor) | ✅ | Private by default. `/creator/new` and `/creator/:id`. Owners can view, enroll in and train their own private courses |
 | 13 | Community courses (publish, browse, filter) | ✅ | `/community`. Publish from the editor (needs 3 lines and a pitch), one upvote per user. No moderation or reporting yet |
 | 14 | "Human moves" mode (Lichess opening explorer) | ✅ | Opponent picks moves by real-game frequency. `/train/human/:courseId`; `GET /api/explorer` is a cached proxy and needs `LICHESS_TOKEN` on the server |
-| 15 | Analysis board (Stockfish WASM) | ✅ | Runs in browser, no server cost. Single-threaded lite build, copied into `client/public/stockfish` before dev and build (no special headers needed). Stockfish is GPLv3 |
-| 16 | Testing (Jest + Playwright) | ✅ | `npm test`: 82 unit tests. `npm run test:e2e`: 38 browser tests (needs `npm run db:up` and seeded courses; starts the dev servers and `e2e/fake-auth.mjs`, a stand-in for Firebase). `npm run check`: types, lint, unit tests |
+| 15 | Analysis board (Stockfish WASM) | ✅ | Runs in browser, no server cost. First/back/forward/last buttons and arrow keys. Single-threaded lite build, copied into `client/public/stockfish` before dev and build. Stockfish is GPLv3: credited with a licence link in the footer |
+| 16 | Testing (Jest + Playwright) | ✅ | `npm test`: 87 unit tests. `npm run test:e2e`: 42 browser tests on their own ports (5273 and 3101), so a running `npm run dev` never interferes; starts `e2e/fake-auth.mjs` in place of Firebase. Needs `npm run db:up` and seeded courses. `npm run check`: types, lint, unit tests |
 | 17 | CI/CD (GitHub Actions) | ✅ | `.github/workflows/ci.yml`: checks, browser tests, Docker build. First run on GitHub passed all three jobs (33 browser tests) |
-| 18 | Deployment (Vercel + Render + Supabase) | 🟨 | Live: site https://check-m8-chess-training-app.vercel.app, API https://checkm8-api.onrender.com, database on Supabase (courses seeded). **Still to do:** Firebase settings on Render and Vercel, Supabase schema update for Firebase, push the Firebase commit, then test sign-in live |
-| 19 | Polish (responsive, PWA, loading/error states, dark theme) | ⬜ | |
+| 18 | Deployment (Vercel + Render + Supabase) | ✅ | Live: site https://check-m8-chess-training-app.vercel.app, API https://checkm8-api.onrender.com, database on Supabase. Firebase sign-in verified live (API end to end; Google pop-up by David). CI on the Firebase commit was held up by a GitHub Actions outage on 2026-10-19 |
+| 19 | Polish (responsive, PWA, loading/error states, dark theme) | ✅ | Phone menu; installable app (manifest, icons, service worker: pages network-first, built files cached, API never cached); crash fallback page; "server is waking up" notice after 4s; days in local time; analysis stepping; footer credits. Dark theme only, by design |
 
 Status key: ⬜ not started · 🟨 in progress · ✅ done
 

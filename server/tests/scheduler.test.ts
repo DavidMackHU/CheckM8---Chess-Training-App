@@ -1,4 +1,4 @@
-import { currentStreak, dayKey, lastDays } from '../src/srs/activity.js'
+import { addDays, currentStreak, dayKey, isTimeZone, lastDays, startOfDay } from '../src/srs/activity.js'
 import { liveStreak, nextStreak, startOfWeek, XP_REVIEW } from '../src/srs/progress.js'
 import { type Grade, gradeDrill, gradeToNumber, isMastered, scheduleLearned, scheduleReview } from '../src/srs/scheduler.js'
 
@@ -117,5 +117,44 @@ describe('days and streaks', () => {
     expect(XP_REVIEW.AGAIN).toBeLessThan(XP_REVIEW.HARD)
     expect(XP_REVIEW.HARD).toBeLessThan(XP_REVIEW.GOOD)
     expect(XP_REVIEW.GOOD).toBeLessThan(XP_REVIEW.EASY)
+  })
+})
+
+describe('days in the player\'s time zone', () => {
+  // 03:30 UTC on 8 Oct is still the evening of 7 Oct in Chicago (UTC-5).
+  const lateEvening = new Date('2026-10-08T03:30:00Z')
+
+  it('names the local calendar day', () => {
+    expect(dayKey(lateEvening)).toBe('2026-10-08')
+    expect(dayKey(lateEvening, 'America/Chicago')).toBe('2026-10-07')
+    expect(dayKey(lateEvening, 'Asia/Tokyo')).toBe('2026-10-08')
+  })
+
+  it('finds the instant the local day began, across a daylight-saving change', () => {
+    expect(startOfDay(lateEvening, 'America/Chicago').toISOString()).toBe('2026-10-07T05:00:00.000Z')
+    expect(startOfDay(lateEvening, 'UTC').toISOString()).toBe('2026-10-08T00:00:00.000Z')
+    // US clocks go back on 1 Nov 2026: that day started at 05:00 UTC (CDT), the next at 06:00 UTC (CST).
+    expect(startOfDay(new Date('2026-11-01T20:00:00Z'), 'America/Chicago').toISOString()).toBe('2026-11-01T05:00:00.000Z')
+    expect(startOfDay(new Date('2026-11-02T20:00:00Z'), 'America/Chicago').toISOString()).toBe('2026-11-02T06:00:00.000Z')
+  })
+
+  it('keeps an evening streak alive where UTC would have broken it', () => {
+    const active = new Set(['2026-10-05', '2026-10-06', '2026-10-07'])
+    expect(currentStreak(active, lateEvening, 'America/Chicago')).toBe(3)
+    expect(nextStreak(3, new Date('2026-10-07T01:00:00Z'), lateEvening, 'America/Chicago')).toBe(4)
+    expect(liveStreak(3, new Date('2026-10-06T20:00:00Z'), lateEvening, 'America/Chicago')).toBe(3)
+    expect(lastDays(2, lateEvening, 'America/Chicago')).toEqual(['2026-10-06', '2026-10-07'])
+  })
+
+  it('steps across month and year ends', () => {
+    expect(addDays('2026-12-31', 1)).toBe('2027-01-01')
+    expect(addDays('2026-03-01', -1)).toBe('2026-02-28')
+  })
+
+  it('accepts only real time zone names', () => {
+    expect(isTimeZone('Europe/London')).toBe(true)
+    expect(isTimeZone('Not/AZone')).toBe(false)
+    expect(isTimeZone("UTC'; DROP TABLE")).toBe(false)
+    expect(isTimeZone(undefined)).toBe(false)
   })
 })

@@ -22,7 +22,7 @@ test.describe('analysis board', () => {
     await expect(page.getByTestId('turn')).toHaveText('White to move')
   })
 
-  test('flip, undo and reset', async ({ page }) => {
+  test('flip, step back and forward, and reset', async ({ page }) => {
     await page.goto('/analysis')
     await clickMove(page, 'e2', 'e4')
     await clickMove(page, 'e7', 'e5')
@@ -33,8 +33,22 @@ test.describe('analysis board', () => {
     expect(after!.x).toBeGreaterThan(before!.x)
     expect(after!.y).toBeLessThan(before!.y)
 
-    await page.getByRole('button', { name: 'Undo' }).click()
-    await expect.poll(() => boardPieces(page)).toBe('rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR')
+    const afterE4 = 'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR'
+    const afterE5 = 'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR'
+    await page.getByRole('button', { name: 'Previous move' }).click()
+    await expect.poll(() => boardPieces(page)).toBe(afterE4)
+    await page.getByRole('button', { name: 'First move' }).click()
+    await expect.poll(() => boardPieces(page)).toBe(START)
+    await page.keyboard.press('ArrowRight')
+    await expect.poll(() => boardPieces(page)).toBe(afterE4)
+    await page.getByRole('button', { name: 'Last move' }).click()
+    await expect.poll(() => boardPieces(page)).toBe(afterE5)
+
+    // A different move after stepping back replaces the rest of the line.
+    await page.keyboard.press('ArrowLeft')
+    await clickMove(page, 'c7', 'c5')
+    await expect(page.getByRole('button', { name: 'Next move' })).toBeDisabled()
+    await expect(page.getByTestId('move-list')).not.toContainText('e5')
     await page.getByRole('button', { name: 'Reset' }).click()
     await expect.poll(() => boardPieces(page)).toBe(START)
   })
@@ -58,6 +72,12 @@ test.describe('analysis board', () => {
   test('opens a position from the address, and falls back on a bad one', async ({ page }) => {
     await page.goto(`/analysis?fen=${encodeURIComponent('6k1/5ppp/8/8/8/8/8/R6K w - - 0 1')}`)
     expect(await boardPieces(page)).toBe('6k1/5ppp/8/8/8/8/8/R6K')
+
+    // Black to move at move 12: the list starts "12. ... Kf8".
+    await page.goto(`/analysis?fen=${encodeURIComponent('6k1/5ppp/8/8/8/8/8/R6K b - - 0 12')}`)
+    await clickMove(page, 'g8', 'f8')
+    await expect(page.getByTestId('move-list')).toHaveText(/^12\.\s*\.\.\.\s*Kf8$/)
+
     await page.goto('/analysis?fen=garbage')
     expect(await boardPieces(page)).toBe(START)
   })

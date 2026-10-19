@@ -1,3 +1,5 @@
+import { trackSlow } from './slowRequests.ts'
+
 /** Error thrown for any non-2xx API response. `message` is safe to show to users. */
 export class ApiError extends Error {
   status: number
@@ -9,15 +11,24 @@ export class ApiError extends Error {
   }
 }
 
+/** Streaks, the heatmap and the daily allowance follow the player's own days. */
+const TIME_ZONE = (() => {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone
+  } catch {
+    return 'UTC'
+  }
+})()
+
 async function request<T>(method: string, path: string, body?: unknown): Promise<T> {
   let res: Response
   try {
-    res = await fetch(`/api${path}`, {
+    res = await trackSlow(fetch(`/api${path}`, {
       method,
       credentials: 'include',
-      headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
+      headers: body === undefined ? { 'X-Time-Zone': TIME_ZONE } : { 'Content-Type': 'application/json', 'X-Time-Zone': TIME_ZONE },
       body: body === undefined ? undefined : JSON.stringify(body),
-    })
+    }))
   } catch {
     throw new ApiError(0, 'Could not reach the server. Check your connection.')
   }

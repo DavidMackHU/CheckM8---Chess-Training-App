@@ -1,5 +1,5 @@
 import type { Prisma } from '../generated/prisma/client.js'
-import { dayKey } from './activity.js'
+import { addDays, dayKey } from './activity.js'
 import type { Grade } from './scheduler.js'
 
 /** XP for learning a new line with hints. */
@@ -14,23 +14,28 @@ export const RATING_LEARNED = 0
 const DAY_MS = 24 * 60 * 60 * 1000
 
 /** The streak after being active on `today`, given the stored streak and its last active day. */
-export function nextStreak(streak: number, lastActive: Date | null, now: Date): number {
+export function nextStreak(streak: number, lastActive: Date | null, now: Date, zone = 'UTC'): number {
   if (!lastActive) return 1
-  const today = dayKey(now)
-  if (dayKey(lastActive) === today) return Math.max(1, streak)
-  if (dayKey(lastActive) === dayKey(new Date(now.getTime() - DAY_MS))) return streak + 1
+  const today = dayKey(now, zone)
+  const last = dayKey(lastActive, zone)
+  if (last === today) return Math.max(1, streak)
+  if (last === addDays(today, -1)) return streak + 1
   return 1
 }
 
 /** A stored streak only still counts if the user was active today or yesterday. */
-export function liveStreak(streak: number, lastActive: Date | null, now = new Date()): number {
+export function liveStreak(streak: number, lastActive: Date | null, now = new Date(), zone = 'UTC'): number {
   if (!lastActive) return 0
-  const last = dayKey(lastActive)
-  return last === dayKey(now) || last === dayKey(new Date(now.getTime() - DAY_MS)) ? streak : 0
+  const last = dayKey(lastActive, zone)
+  const today = dayKey(now, zone)
+  return last === today || last === addDays(today, -1) ? streak : 0
 }
 
-/** Adds XP and advances the daily streak. Call inside the same transaction as the activity itself. */
-export async function recordActivity(tx: Prisma.TransactionClient, userId: string, xp: number, now = new Date()) {
+/**
+ * Adds XP and advances the daily streak, in the player's time zone (remembered
+ * for the leaderboards). Call inside the same transaction as the activity itself.
+ */
+export async function recordActivity(tx: Prisma.TransactionClient, userId: string, xp: number, zone = 'UTC', now = new Date()) {
   const user = await tx.user.findUniqueOrThrow({
     where: { id: userId },
     select: { streak: true, lastActiveDate: true },
@@ -39,8 +44,9 @@ export async function recordActivity(tx: Prisma.TransactionClient, userId: strin
     where: { id: userId },
     data: {
       xp: { increment: xp },
-      streak: nextStreak(user.streak, user.lastActiveDate, now),
+      streak: nextStreak(user.streak, user.lastActiveDate, now, zone),
       lastActiveDate: now,
+      timeZone: zone,
     },
     select: { xp: true, streak: true },
   })

@@ -1,5 +1,8 @@
-import { Route, Routes } from 'react-router'
+import { Route, Routes, useLocation } from 'react-router'
+import ErrorBoundary from './components/ErrorBoundary.tsx'
+import Footer from './components/Footer.tsx'
 import Navbar from './components/Navbar.tsx'
+import ServerWaking from './components/ServerWaking.tsx'
 import Analysis from './pages/Analysis.tsx'
 import AuthPage from './pages/AuthPage.tsx'
 import Community from './pages/Community.tsx'
@@ -17,27 +20,34 @@ import Review from './pages/Review.tsx'
 import TryLine from './pages/TryLine.tsx'
 
 export default function App() {
+  const { pathname } = useLocation()
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/openings" element={<Openings />} />
-        <Route path="/course/:slug" element={<CoursePage />} />
-        <Route path="/course/:slug/try" element={<TryLine />} />
-        <Route path="/train/learn/:courseId" element={<Learn />} />
-        <Route path="/train/human/:courseId" element={<HumanMoves />} />
-        <Route path="/train/review" element={<Review />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/leaderboards" element={<Leaderboards />} />
-        <Route path="/creator/new" element={<CreatorNew />} />
-        <Route path="/creator/:id" element={<CreatorEdit />} />
-        <Route path="/community" element={<Community />} />
-        <Route path="/analysis" element={<Analysis />} />
-        <Route path="/login" element={<AuthPage mode="login" />} />
-        <Route path="/signup" element={<AuthPage mode="signup" />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <div className="flex-1">
+        <ErrorBoundary key={pathname}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/openings" element={<Openings />} />
+            <Route path="/course/:slug" element={<CoursePage />} />
+            <Route path="/course/:slug/try" element={<TryLine />} />
+            <Route path="/train/learn/:courseId" element={<Learn />} />
+            <Route path="/train/human/:courseId" element={<HumanMoves />} />
+            <Route path="/train/review" element={<Review />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/leaderboards" element={<Leaderboards />} />
+            <Route path="/creator/new" element={<CreatorNew />} />
+            <Route path="/creator/:id" element={<CreatorEdit />} />
+            <Route path="/community" element={<Community />} />
+            <Route path="/analysis" element={<Analysis />} />
+            <Route path="/login" element={<AuthPage mode="login" />} />
+            <Route path="/signup" element={<AuthPage mode="signup" />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ErrorBoundary>
+      </div>
+      <Footer />
+      <ServerWaking />
     </div>
   )
 }

@@ -17,6 +17,7 @@ type CourseCardStats = { courseId: string; learned: bigint; mastered: bigint; du
 statsRouter.get('/me', async (req, res) => {
   const userId = req.userId!
   const now = new Date()
+  const zone = req.timeZone
 
   const [user, enrollments, cardStats, reviewDays, learnDays] = await Promise.all([
     prisma.user.findUnique({ where: { id: userId }, select: { dailyNewLimit: true, xp: true } }),
@@ -33,14 +34,14 @@ statsRouter.get('/me', async (req, res) => {
       FROM "Card" c JOIN "Line" l ON l.id = c."lineId"
       WHERE c."userId" = ${userId}
       GROUP BY l."courseId"`,
-    // Activity per UTC day (timestamps are stored in UTC). Rating 0 rows mark learned
+    // Activity per day in the player's time zone (timestamps are stored in UTC). Rating 0 rows mark learned
     // lines; those are counted from the cards instead. All dates ever, so the
     // streak is not cut off at the heatmap's edge.
     prisma.$queryRaw<DayCount[]>`
-      SELECT to_char("reviewedAt", 'YYYY-MM-DD') AS day, count(*) AS count
+      SELECT to_char(("reviewedAt" AT TIME ZONE 'UTC') AT TIME ZONE ${zone}, 'YYYY-MM-DD') AS day, count(*) AS count
       FROM "ReviewLog" WHERE "userId" = ${userId} AND rating > 0 GROUP BY 1`,
     prisma.$queryRaw<DayCount[]>`
-      SELECT to_char("createdAt", 'YYYY-MM-DD') AS day, count(*) AS count
+      SELECT to_char(("createdAt" AT TIME ZONE 'UTC') AT TIME ZONE ${zone}, 'YYYY-MM-DD') AS day, count(*) AS count
       FROM "Card" WHERE "userId" = ${userId} GROUP BY 1`,
   ])
 
@@ -77,7 +78,7 @@ statsRouter.get('/me', async (req, res) => {
 
   const sum = (field: 'total' | 'learned' | 'mastered' | 'due' | 'new') => courses.reduce((n, c) => n + c[field], 0)
   const total = sum('total')
-  const today = activity.get(dayKey(now))
+  const today = activity.get(dayKey(now, zone))
   const dailyNewLimit = user?.dailyNewLimit ?? 5
   const newLeftToday = Math.max(0, dailyNewLimit - (today?.learned ?? 0))
 
@@ -90,9 +91,9 @@ statsRouter.get('/me', async (req, res) => {
     mastered: sum('mastered'),
     totalLines: total,
     masteredPercent: total > 0 ? Math.round((sum('mastered') / total) * 100) : 0,
-    streak: currentStreak(new Set(activity.keys()), now),
+    streak: currentStreak(new Set(activity.keys()), now, zone),
     xp: user?.xp ?? 0,
-    heatmap: lastDays(HEATMAP_DAYS, now).map((date) => ({
+    heatmap: lastDays(HEATMAP_DAYS, now, zone).map((date) => ({
       date,
       reviews: activity.get(date)?.reviews ?? 0,
       learned: activity.get(date)?.learned ?? 0,

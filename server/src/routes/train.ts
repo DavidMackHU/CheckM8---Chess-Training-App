@@ -2,6 +2,7 @@ import { Router } from 'express'
 import { prisma } from '../db.js'
 import { visibleTo } from '../lib/access.js'
 import { requireAuth } from '../middleware/auth.js'
+import { startOfDay } from '../srs/activity.js'
 import { RATING_LEARNED, recordActivity, XP_LEARNED, XP_REVIEW } from '../srs/progress.js'
 import { gradeDrill, gradeToNumber, scheduleLearned, scheduleReview } from '../srs/scheduler.js'
 
@@ -11,15 +12,11 @@ trainRouter.use(requireAuth)
 /** Most lines served in one review session. More stay queued for the next one. */
 const REVIEW_BATCH = 30
 
-function startOfUtcDay(now = new Date()): Date {
-  return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()))
-}
-
-/** How many more new lines the user may learn today, across all courses. */
-async function newLinesLeftToday(userId: string): Promise<{ left: number; learnedToday: number; limit: number }> {
+/** How many more new lines the user may learn today (their own day), across all courses. */
+async function newLinesLeftToday(userId: string, zone: string): Promise<{ left: number; learnedToday: number; limit: number }> {
   const [user, learnedToday] = await Promise.all([
     prisma.user.findUnique({ where: { id: userId }, select: { dailyNewLimit: true } }),
-    prisma.card.count({ where: { userId, createdAt: { gte: startOfUtcDay() } } }),
+    prisma.card.count({ where: { userId, createdAt: { gte: startOfDay(new Date(), zone) } } }),
   ])
   const limit = user?.dailyNewLimit ?? 5
   return { left: Math.max(0, limit - learnedToday), learnedToday, limit }
@@ -47,7 +44,7 @@ trainRouter.get('/learn/:courseId', async (req, res) => {
     return
   }
 
-  const allowance = await newLinesLeftToday(userId)
+  const allowance = await newLinesLeftToday(userId, req.timeZone)
   const unlearned = { courseId, cards: { none: { userId } } }
   const [lines, newInCourse, totalInCourse] = await Promise.all([
     prisma.line.findMany({
@@ -154,7 +151,7 @@ trainRouter.post('/learned', async (req, res) => {
     await tx.reviewLog.create({
       data: { userId, lineId, rating: RATING_LEARNED, mistakes: 0, avgMs: 0, xpEarned: XP_LEARNED },
     })
-    return [created, await recordActivity(tx, userId, XP_LEARNED)] as const
+    return [created, await recordActivity(tx, userId, XP_LEARNED, req.timeZone)] as const
   })
   res.status(201).json({ card, xpEarned: XP_LEARNED, totalXp: user.xp, streak: user.streak })
 })
@@ -196,7 +193,7 @@ trainRouter.post('/result', async (req, res) => {
     await tx.reviewLog.create({
       data: { userId, lineId, rating: gradeToNumber(grade), mistakes, avgMs: Math.round(avgMs), xpEarned },
     })
-    return [saved, await recordActivity(tx, userId, xpEarned)] as const
+    return [saved, await recordActivity(tx, userId, xpEarned, req.timeZone)] as const
   })
 
   res.json({

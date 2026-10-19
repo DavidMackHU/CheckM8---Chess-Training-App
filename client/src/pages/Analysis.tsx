@@ -1,5 +1,5 @@
 import { validateFen } from 'chess.js'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import Board from '../components/Board.tsx'
 import EngineEvalBar from '../components/EngineEvalBar.tsx'
@@ -14,6 +14,7 @@ const STATUS_TEXT = { playing: null, checkmate: 'Checkmate', stalemate: 'Stalema
 const ENGINE_KEY = 'od.engine'
 const buttonClass =
   'rounded-md border border-slate-700 px-3 py-1.5 text-sm hover:border-slate-500 disabled:opacity-40'
+const stepClass = `${buttonClass} min-h-11 font-mono`
 
 const ENGINE_STATUS_TEXT: Record<EngineStatus, string> = {
   off: 'Engine is off.',
@@ -57,6 +58,8 @@ function AnalysisBoard({ startFen }: { startFen: string }) {
   const [engineOn, setEngineOn] = useState(engineSaved)
   // The position the moves on the board started from (changes when a PGN is loaded).
   const [baseFen, setBaseFen] = useState(startFen)
+  // Moves stepped back over, next one first. Stepping forward replays them.
+  const [ahead, setAhead] = useState<string[]>([])
 
   const gameOver = game.status !== 'playing'
   const { info, status } = useEngine(engineOn && !gameOver ? game.fen : null)
@@ -64,8 +67,41 @@ function AnalysisBoard({ startFen }: { startFen: string }) {
   function onMove(input: MoveInput): boolean {
     const outcome = game.move(input)
     playSound(outcome ? soundForMove(outcome) : 'wrong')
+    // Playing the next move of the line keeps the rest; any other move starts a new line.
+    if (outcome) setAhead((a) => (a[0] === outcome.san ? a.slice(1) : []))
     return outcome !== null
   }
+
+  function back(steps = 1) {
+    const undone = game.history.slice(-steps).map((m) => m.san)
+    for (let i = 0; i < undone.length; i++) game.undo()
+    if (undone.length > 0) setAhead((a) => [...undone, ...a])
+  }
+
+  function forward(steps = 1) {
+    const next = ahead.slice(0, steps)
+    let last = null
+    for (const san of next) last = game.move(san) ?? last
+    if (last) playSound(soundForMove(last))
+    setAhead((a) => a.slice(next.length))
+  }
+
+  // Arrow keys step through the moves, except while typing in a field.
+  const keys = useRef({ back, forward })
+  useEffect(() => {
+    keys.current = { back, forward }
+  })
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if ((e.target as HTMLElement).closest('input, textarea, select')) return
+      if (e.key === 'ArrowLeft') keys.current.back()
+      else if (e.key === 'ArrowRight') keys.current.forward()
+      else return
+      e.preventDefault()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   function toggleEngine() {
     const next = !engineOn
@@ -82,6 +118,7 @@ function AnalysisBoard({ startFen }: { startFen: string }) {
     if (!parsed) return false
     setBaseFen(parsed.startFen)
     game.load(parsed.startFen, parsed.moves)
+    setAhead([])
     return true
   }
 
@@ -151,14 +188,14 @@ function AnalysisBoard({ startFen }: { startFen: string }) {
           >
             Flip board
           </button>
-          <button type="button" className={buttonClass} onClick={game.undo} disabled={game.history.length === 0}>
-            Undo
-          </button>
           <button
             type="button"
             className={buttonClass}
-            onClick={() => game.reset(baseFen)}
-            disabled={game.history.length === 0}
+            onClick={() => {
+              game.reset(baseFen)
+              setAhead([])
+            }}
+            disabled={game.history.length === 0 && ahead.length === 0}
           >
             Reset
           </button>
@@ -175,14 +212,34 @@ function AnalysisBoard({ startFen }: { startFen: string }) {
           </button>
         </div>
 
-        <MoveList moves={moves} />
+        <div className="grid grid-cols-4 gap-2" role="group" aria-label="Step through moves">
+          <button type="button" className={stepClass} onClick={() => back(moves.length)} disabled={moves.length === 0} aria-label="First move">
+            |&lt;
+          </button>
+          <button type="button" className={stepClass} onClick={() => back()} disabled={moves.length === 0} aria-label="Previous move">
+            &lt;
+          </button>
+          <button type="button" className={stepClass} onClick={() => forward()} disabled={ahead.length === 0} aria-label="Next move">
+            &gt;
+          </button>
+          <button
+            type="button"
+            className={stepClass}
+            onClick={() => forward(ahead.length)}
+            disabled={ahead.length === 0}
+            aria-label="Last move"
+          >
+            &gt;|
+          </button>
+        </div>
+        <MoveList moves={moves} future={ahead} startFen={baseFen} />
         <PositionTools
           fen={game.fen}
           pgn={toPgn(baseFen, moves)}
           onLoadFen={(fen) => setParams({ fen })}
           onLoadPgn={loadPgn}
         />
-        <p className="text-xs text-slate-500">Right-drag on the board to draw arrows.</p>
+        <p className="text-xs text-slate-500">Arrow keys step through the moves. Right-drag on the board to draw arrows.</p>
       </aside>
     </main>
   )

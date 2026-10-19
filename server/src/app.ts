@@ -1,5 +1,6 @@
 import cookieParser from 'cookie-parser'
 import express, { type NextFunction, type Request, type Response } from 'express'
+import { timeZone } from './middleware/auth.js'
 import { authRouter } from './routes/auth.js'
 import { coursesRouter } from './routes/courses.js'
 import { creatorRouter } from './routes/creator.js'
@@ -16,6 +17,7 @@ export function createApp() {
   app.set('trust proxy', Number(process.env.TRUST_PROXY) || 1)
   app.use(express.json({ limit: '1mb' }))
   app.use(cookieParser())
+  app.use(timeZone)
 
   app.use('/api', healthRouter)
   app.use('/api/auth', authRouter)

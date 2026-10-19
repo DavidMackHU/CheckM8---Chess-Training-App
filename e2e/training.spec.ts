@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { BASE_URL } from './ports.ts'
 import { clickMove, createCourse, enroll, playDrillLine, signUp, SMALL_LINES, SMALL_PGN, sql } from './helpers.ts'
 
 /** Makes every card of this user due now, most overdue first in line order. */
@@ -183,4 +184,24 @@ test('XP puts players on the weekly and all-time leaderboards', async ({ page })
   await expect(mine).toContainText('17')
   await page.getByRole('tab', { name: 'All time' }).click()
   await expect(page.locator('tr[data-me]')).toContainText('17')
+})
+
+test('days follow the player\'s own time zone', async ({ browser }) => {
+  // UTC+14: for most of the UTC day it is already tomorrow here.
+  const zone = 'Pacific/Kiritimati'
+  const context = await browser.newContext({ baseURL: BASE_URL, timezoneId: zone })
+  const page = await context.newPage()
+  await signUp(page, 'tz')
+  const course = await createCourse(page.request, { title: 'PW Zone Course', side: 'WHITE', pgn: SMALL_PGN })
+  await enroll(page.request, course.id)
+  await page.request.post('/api/train/learned', { data: { lineId: course.lines[0].id }, headers: { 'X-Time-Zone': zone } })
+
+  const today = new Intl.DateTimeFormat('en-CA', { timeZone: zone }).format(new Date())
+  await page.goto('/dashboard')
+  const cells = page.locator('[data-testid=heatmap] button')
+  await expect(cells.last()).toHaveAttribute('data-date', today)
+  await page.hover(`[data-date="${today}"]`)
+  await expect(page.getByTestId('heatmap-detail')).toContainText('1 new line')
+  await expect(page.getByTestId('tile-streak')).toContainText(/Current streak\s*1\s*day/)
+  await context.close()
 })

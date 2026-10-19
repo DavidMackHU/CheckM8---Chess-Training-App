@@ -1,6 +1,7 @@
 import { expect, type Page, test } from '@playwright/test'
 import { mintToken, sentEmails, useFakeFirebase } from './fakeFirebase.ts'
 import { signUp, sql, testName } from './helpers.ts'
+import { BASE_URL } from './ports.ts'
 
 // Firebase is played by e2e/fake-auth.mjs; the sign-in form, the SDK and our API run for real.
 
@@ -163,7 +164,7 @@ test('the session cookie is hidden from scripts and a forged one is refused', as
   expect(cookie?.sameSite).toBe('Lax')
 
   await context.clearCookies()
-  await context.addCookies([{ name: 'od_session', value: 'abc.def.ghi', url: 'http://localhost:5173' }])
+  await context.addCookies([{ name: 'od_session', value: 'abc.def.ghi', url: BASE_URL }])
   expect((await page.request.get('/api/auth/me')).status()).toBe(401)
 })
 

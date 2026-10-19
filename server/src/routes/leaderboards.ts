@@ -22,13 +22,13 @@ leaderboardsRouter.get('/', optionalAuth, async (req, res) => {
       where: { xp: { gt: 0 } },
       orderBy: [{ xp: 'desc' }, { createdAt: 'asc' }],
       take: TOP,
-      select: { id: true, username: true, xp: true, streak: true, lastActiveDate: true },
+      select: { id: true, username: true, xp: true, streak: true, lastActiveDate: true, timeZone: true },
     })
     entries = users.map((u, i) => ({
       rank: i + 1,
       username: u.username,
       xp: u.xp,
-      streak: liveStreak(u.streak, u.lastActiveDate, now),
+      streak: liveStreak(u.streak, u.lastActiveDate, now, u.timeZone),
     }))
     if (userId) {
       const self = await prisma.user.findUnique({ where: { id: userId }, select: { xp: true } })
@@ -48,13 +48,13 @@ leaderboardsRouter.get('/', optionalAuth, async (req, res) => {
     const top = totals.slice(0, TOP)
     const users = await prisma.user.findMany({
       where: { id: { in: top.map((t) => t.userId) } },
-      select: { id: true, username: true, streak: true, lastActiveDate: true },
+      select: { id: true, username: true, streak: true, lastActiveDate: true, timeZone: true },
     })
     const byId = new Map(users.map((u) => [u.id, u]))
     entries = top.flatMap((t, i) => {
       const u = byId.get(t.userId)
       return u
-        ? [{ rank: i + 1, username: u.username, xp: t._sum.xpEarned ?? 0, streak: liveStreak(u.streak, u.lastActiveDate, now) }]
+        ? [{ rank: i + 1, username: u.username, xp: t._sum.xpEarned ?? 0, streak: liveStreak(u.streak, u.lastActiveDate, now, u.timeZone) }]
         : []
     })
     if (userId) {
