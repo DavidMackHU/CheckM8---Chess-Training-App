@@ -27,7 +27,7 @@ Before doing anything else:
 | 3 | Auth (register, login, JWT) | ✅ | Now Firebase Authentication: email/password, Google, password reset, verification email. The server swaps Firebase's token for its own httpOnly cookie (same-origin through the site's address). Pre-Firebase password accounts move over on first login. Run `npm run db:push` after schema changes |
 | 4 | Chess board core (chess.js + react-chessboard) | ✅ | Move validation, flip board, arrows, sounds. Try it at `/analysis` (free board, no engine yet) |
 | 5 | Data models + course generator + seed | ✅ | `npm run generate-course` → `content/*.json` → `npm run db:seed`. 5 starter courses generated (60 lines each, ~10 moves deep). **Still to do by hand:** prune lines, write pitch, description and comments (see `content/README.md`) |
-| 6 | Course catalog + course detail pages | ✅ | Cards with board thumbnail, side, line count. Catalog on `/` and `/openings`, detail on `/course/:slug`, enroll works |
+| 6 | Course catalog + course detail pages | ✅ | Cards with board thumbnail, side, line count. Catalog on `/` and `/openings`, detail on `/course/:slug`, enroll works. The detail page lists lines with filters (type: main/sideline/checkmate/punish, style: tactical/positional, variation, your progress, search) and checkboxes; "Train selected" opens `/train/lines/:courseId?ids=...` (new lines taught, learned ones reviewed) |
 | 7 | Learn mode | ✅ | The move stays hidden until the user taps **Show hint** (arrow, move name, comment). Guests: `/course/:slug/try`. Members: `/train/learn/:courseId`, 5 lines per session with "Learn more" to continue. No daily limit (removed 2026-10-19) |
 | 8 | Spaced repetition engine (ts-fsrs) | ✅ | One card per line. Learned lines are due next day; `POST /api/train/result` grades and reschedules. Logic in `server/src/srs/scheduler.ts` |
 | 9 | Review mode (due queue) | ✅ | From memory; a wrong move or a hint counts as a mistake → "Again". A wrong move no longer reveals the answer. `/train/review` serves due lines across all courses, most overdue first, 30 per session |
@@ -135,7 +135,7 @@ All official courses are generated from public data and annotated by us. We neve
 2. **Review** — open the PGN, prune lines that are too long, redundant, or unplayable; target 25–60 lines per course.
 3. **Annotate** — add a one-line comment at key moments in each line (the plan, the trap, the pawn break). An LLM may draft comments from engine evals; a human edits every one.
 4. **Write the pitch** — one punchy sentence + 2-sentence description per course, in our own voice.
-5. **Checkmate lines** — `npm run find-mates -- --course <slug> --write` adds lines where a real-game opponent mistake allows a forced mate, found with Stockfish in Node and checked to end in checkmate. Named "Checkmate: ...", appended after the generated lines.
+5. **Punish common mistakes** — `npm run find-traps -- --course <slug> --write` looks up the opponent replies real players make at every course position (Lichess, 1000-1200 by default) and asks Stockfish (in Node) about each one the course does not cover. "Checkmate: ..." lines play a forced mate to the end (checked to be mate); "Punish: ..." lines show the user's best three moves after a mistake that costs at least 1.5 pawns. Appended after the generated lines, with a comment on the mistake.
 6. **Seed** — `prisma/seed.ts` reads every `content/*.json` and upserts `Course` + `Line` rows by slug (idempotent, safe to re-run).
 
 **Starter courses (v1):**
@@ -198,6 +198,7 @@ Hand-added fields (merged by the seed if present): `slug`, `description`, `pitch
 | POST | `/api/courses/:id/enroll` | Enroll |
 | GET | `/api/train/learn/:courseId` | Next N new lines |
 | GET | `/api/train/review` | Due lines queue |
+| GET | `/api/train/lines/:courseId?ids=` | Chosen lines, and which are already learned |
 | POST | `/api/train/result` | Submit result `{lineId, mistakes, avgMs}` → FSRS update, XP |
 | GET | `/api/stats/me` | Dashboard numbers + heatmap |
 | GET | `/api/leaderboards?period=week\|all` | Rankings |
@@ -217,7 +218,7 @@ Course      id, slug (unique), title, pitch, description, side (WHITE|BLACK),
             keyFen (thumbnail position), source (GENERATED|PGN|MANUAL),
             authorId → User, isOfficial, isPublic, startFen, upvotes, createdAt
 Line        id, courseId → Course, order, name, moves (string[] SAN),
-            comments (Json: {ply: text}), finalFen
+            comments (Json: {ply: text}), finalFen, tags (string[]: type + style, set on seed/save)
 Enrollment  userId, courseId, createdAt   (composite PK)
 Card        id, userId, lineId, due, stability, difficulty, elapsedDays,
             scheduledDays, reps, lapses, state, lastReview  (unique userId+lineId)

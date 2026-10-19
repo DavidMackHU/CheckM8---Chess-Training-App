@@ -85,6 +85,8 @@ model Line {
   moves    String[]
   comments Json   @default("{}")
   finalFen String
+  /// Filters on the course page, e.g. ["main", "tactical"]. See src/content/lineTags.ts.
+  tags     String[] @default([])
   cards    Card[]
   reviews  ReviewLog[]
 

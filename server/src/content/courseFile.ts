@@ -1,4 +1,5 @@
 import { Chess } from 'chess.js'
+import { lineTags, lineTypes } from './lineTags.js'
 
 /** A course ready to be written to the database, after validation. */
 export type ParsedCourse = {
@@ -21,6 +22,7 @@ export type ParsedLine = {
   moves: string[]
   comments: Record<string, string>
   finalFen: string
+  tags: string[]
 }
 
 const DIFFICULTIES = ['BEGINNER', 'INTERMEDIATE', 'ADVANCED'] as const
@@ -107,7 +109,17 @@ export function parseCourseFile(raw: unknown, fallbackSlug: string): ParsedCours
     }
 
     // Order follows the file, so reordering or pruning lines by hand just works.
-    return { order: index + 1, name, moves, comments, finalFen: chess.fen() }
+    return { order: index + 1, name, moves, comments, finalFen: chess.fen(), tags: [] }
+  })
+
+  const types = lineTypes(
+    raw.lines.map((item, i) => ({
+      name: lines[i].name,
+      frequency: isRecord(item) && typeof item.frequency === 'number' ? item.frequency : undefined,
+    })),
+  )
+  lines.forEach((line, i) => {
+    line.tags = lineTags({ moves: line.moves, keyPly: keyMoves.length, type: types[i], startFen })
   })
 
   return {

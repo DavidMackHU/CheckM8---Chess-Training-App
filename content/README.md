@@ -26,23 +26,29 @@ Never copy another platform's courses, comments, or line selections.
    redundant, or unplayable. Aim for 25–60 lines. Line order in the file is the
    order users learn them.
 
-3. **Add checkmate lines**
+3. **Punish common mistakes**
 
    ```bash
-   npm run find-mates -- --course london-system           # report only
-   npm run find-mates -- --course london-system --write   # add them
+   npm run find-traps -- --course london-system           # report only
+   npm run find-traps -- --course london-system --write   # add them
    ```
 
-   Looks at every position in the course where the opponent moves, finds replies
-   real players make that allow a forced mate, and asks Stockfish for it. Each
-   new line follows the course's own moves up to the mistake, then the fastest
-   mate against the best defence, and is checked to end in checkmate. The lines
-   are named "Checkmate: ..." and go at the end of the file, with a short
-   comment on the mistake. Re-running replaces them.
-   Flags: `--count 4`, `--max-mate 7`, `--min-share 0.005`, `--min-games 10`,
-   `--depth 14`, `--ratings club` (Lichess 1400-2000) or `--ratings casual`
-   (1000-1200, where these mistakes are far more common; slower the first time,
-   since those answers are not cached yet).
+   Looks at every position in the course where the opponent moves, finds the
+   replies real players make that the course does not cover, and asks Stockfish
+   about each. Two kinds of line are added, each following the course's own
+   moves up to the mistake:
+
+   - **Checkmate: ...** – the mistake allows a forced mate. The line plays the
+     fastest mate against the best defence and is checked to end in checkmate.
+   - **Punish: ...** – the mistake costs the opponent at least 1.5 pawns and
+     leaves the user 2 or more ahead. The line shows the user's best three moves.
+
+   They go at the end of the file with a short comment on the mistake.
+   Re-running replaces them. Flags: `--mates 4`, `--punish 6`, `--max-mate 8`,
+   `--min-advantage 200`, `--min-swing 150`, `--punish-moves 3`,
+   `--min-share 0.005`, `--min-games 10`, `--depth 14`, and `--ratings casual`
+   (Lichess 1000-1200, the default, where mistakes are common) or `club`
+   (1400-2000). New rating data is fetched slowly the first time, then cached.
 
 4. **Annotate** – add fields by hand to the JSON:
 

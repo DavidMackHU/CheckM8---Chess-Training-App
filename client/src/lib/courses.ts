@@ -29,7 +29,10 @@ export type CourseDetail = CourseCard & {
   /** True when the viewer wrote this course. */
   isOwner: boolean
 }
-export type CourseLine = { id: string; order: number; name: string; moves: string[]; finalFen: string }
+export type CourseLine = { id: string; order: number; name: string; moves: string[]; finalFen: string; tags: string[] }
+
+/** The viewer's state per line they have started. Lines not listed are new. */
+export type LineProgressMap = Record<string, 'learning' | 'due' | 'mastered'>
 
 /** Catalog filters. Empty string means "any". */
 export type CourseFilterValues = {
@@ -58,7 +61,7 @@ export function useCourses(filters: CourseFilterValues) {
 export function useCourse(slug: string) {
   return useQuery({
     queryKey: ['course', slug],
-    queryFn: () => apiGet<{ course: CourseDetail; lines: CourseLine[] }>(`/courses/${encodeURIComponent(slug)}`),
+    queryFn: () => apiGet<{ course: CourseDetail; lines: CourseLine[]; progress: LineProgressMap }>(`/courses/${encodeURIComponent(slug)}`),
     retry: false,
   })
 }

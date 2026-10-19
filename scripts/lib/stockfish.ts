@@ -6,6 +6,8 @@ import path from 'node:path'
 export type Analysis = {
   /** Moves to mate for the side to move (negative: being mated), or null if no mate was found. */
   mate: number | null
+  /** Score in centipawns for the side to move, when there is no mate. */
+  cp: number | null
   /** Best line in UCI, e.g. ["e2e4", "e7e5"]. */
   pv: string[]
 }
@@ -38,11 +40,12 @@ export async function startStockfish(root: string): Promise<Engine> {
     const run = queue.then(
       () =>
         new Promise<Analysis>((resolve) => {
-          let last: Analysis = { mate: null, pv: [] }
+          let last: Analysis = { mate: null, cp: null, pv: [] }
           waiting = (line) => {
             if (line.startsWith('info') && line.includes(' pv ') && !line.includes('multipv 2')) {
               const mate = /score mate (-?\d+)/.exec(line)
-              last = { mate: mate ? Number(mate[1]) : null, pv: line.slice(line.indexOf(' pv ') + 4).trim().split(/\s+/) }
+              const cp = /score cp (-?\d+)/.exec(line)
+              last = { mate: mate ? Number(mate[1]) : null, cp: cp ? Number(cp[1]) : null, pv: line.slice(line.indexOf(' pv ') + 4).trim().split(/\s+/) }
             } else if (line.startsWith('bestmove')) {
               waiting = null
               resolve(last)

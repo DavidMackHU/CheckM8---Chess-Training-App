@@ -17,6 +17,7 @@ import Learn from './pages/Learn.tsx'
 import NotFound from './pages/NotFound.tsx'
 import Openings from './pages/Openings.tsx'
 import Review from './pages/Review.tsx'
+import TrainLines from './pages/TrainLines.tsx'
 import TryLine from './pages/TryLine.tsx'
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
             <Route path="/train/learn/:courseId" element={<Learn />} />
             <Route path="/train/human/:courseId" element={<HumanMoves />} />
             <Route path="/train/review" element={<Review />} />
+            <Route path="/train/lines/:courseId" element={<TrainLines />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/leaderboards" element={<Leaderboards />} />
             <Route path="/creator/new" element={<CreatorNew />} />

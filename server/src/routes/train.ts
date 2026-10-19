@@ -57,6 +57,45 @@ trainRouter.get('/learn/:courseId', async (req, res) => {
 })
 
 // GET /api/train/human/:courseId  -> every line of a course, for Human moves mode (nothing is graded)
+/** Most lines one chosen-lines session can hold. */
+const CHOSEN_MAX = 60
+
+// GET /api/train/lines/:courseId?ids=a,b,c  -> lines the player picked, in course order, and which they have learned
+trainRouter.get('/lines/:courseId', async (req, res) => {
+  const userId = req.userId!
+  const courseId = String(req.params.courseId)
+  const ids = String(req.query.ids ?? '')
+    .split(',')
+    .filter(Boolean)
+    .slice(0, CHOSEN_MAX)
+  if (ids.length === 0) {
+    res.status(400).json({ error: 'Choose at least one line.' })
+    return
+  }
+
+  const course = await prisma.course.findFirst({
+    where: { id: courseId, ...visibleTo(userId) },
+    select: { id: true, slug: true, title: true, side: true, startFen: true },
+  })
+  if (!course) {
+    res.status(404).json({ error: 'Course not found.' })
+    return
+  }
+  const enrolled = await prisma.enrollment.findUnique({ where: { userId_courseId: { userId, courseId } }, select: { userId: true } })
+  if (!enrolled) {
+    res.status(403).json({ error: 'Enroll in this course first.' })
+    return
+  }
+
+  const lines = await prisma.line.findMany({
+    where: { courseId, id: { in: ids } },
+    orderBy: { order: 'asc' },
+    select: { id: true, order: true, name: true, moves: true, comments: true, finalFen: true },
+  })
+  const cards = await prisma.card.findMany({ where: { userId, lineId: { in: lines.map((l) => l.id) } }, select: { lineId: true } })
+  res.json({ course, lines, learned: cards.map((c) => c.lineId) })
+})
+
 trainRouter.get('/human/:courseId', async (req, res) => {
   const course = await prisma.course.findFirst({
     where: { id: String(req.params.courseId), ...visibleTo(req.userId) },

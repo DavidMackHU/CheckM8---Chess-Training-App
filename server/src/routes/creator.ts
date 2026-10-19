@@ -1,5 +1,6 @@
 import { randomBytes } from 'node:crypto'
 import { Router } from 'express'
+import { lineTags } from '../content/lineTags.js'
 import { type CleanLine, cleanLines, keyPosition, START_FEN } from '../content/lines.js'
 import { parsePgn } from '../content/pgn.js'
 import { prisma } from '../db.js'
@@ -41,6 +42,7 @@ function findOwned(id: string, userId: string) {
  * so review cards for it survive an edit. Removed lines take their cards with them.
  */
 async function saveLines(tx: Prisma.TransactionClient, courseId: string, lines: CleanLine[]) {
+  const keyPly = keyPosition(lines).keyMoves.length
   const existing = await tx.line.findMany({ where: { courseId }, select: { id: true, moves: true } })
   const idByMoves = new Map(existing.map((l) => [l.moves.join(' '), l.id]))
   const keptIds = new Set(lines.map((l) => idByMoves.get(l.moves.join(' '))).filter((id): id is string => !!id))
@@ -50,7 +52,8 @@ async function saveLines(tx: Prisma.TransactionClient, courseId: string, lines: 
   for (const [i, id] of [...keptIds].entries()) await tx.line.update({ where: { id }, data: { order: -(i + 1) } })
 
   for (const [i, line] of lines.entries()) {
-    const data = { order: i + 1, name: line.name, moves: line.moves, comments: line.comments, finalFen: line.finalFen }
+    const tags = lineTags({ moves: line.moves, keyPly, type: 'main' })
+    const data = { order: i + 1, name: line.name, moves: line.moves, comments: line.comments, finalFen: line.finalFen, tags }
     const id = idByMoves.get(line.moves.join(' '))
     if (id) await tx.line.update({ where: { id }, data })
     else await tx.line.create({ data: { courseId, ...data } })

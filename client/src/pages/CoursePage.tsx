@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router'
 import BoardThumbnail from '../components/BoardThumbnail.tsx'
+import LineBrowser from '../components/LineBrowser.tsx'
 import { SideBadge } from '../components/CourseCard.tsx'
 import { ApiError } from '../lib/api.ts'
 import { useCurrentUser } from '../lib/auth.ts'
@@ -151,29 +152,7 @@ export default function CoursePage() {
         </div>
       </header>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-xl font-semibold">Lines</h2>
-        <ol data-testid="line-list" className="divide-y divide-slate-800 rounded-xl border border-slate-800">
-          {lines.map((line) => (
-            <li key={line.id} className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-baseline sm:gap-4">
-              <span className="w-8 shrink-0 text-sm text-slate-500">{line.order}.</span>
-              <div className="min-w-0 flex-1">
-                <p className="font-medium">{line.name}</p>
-                <p className="font-mono text-sm break-words text-slate-400">
-                  <span className="text-slate-600">{formatMoves(line.moves.slice(0, keyPly))}</span>{' '}
-                  {formatMoves(line.moves).slice(formatMoves(line.moves.slice(0, keyPly)).length).trim()}
-                </p>
-              </div>
-              <Link
-                to={`/analysis?fen=${encodeURIComponent(line.finalFen)}`}
-                className="shrink-0 text-sm text-emerald-400 hover:underline"
-              >
-                View position
-              </Link>
-            </li>
-          ))}
-        </ol>
-      </section>
+      <LineBrowser courseId={course.id} lines={lines} keyPly={keyPly} progress={data.progress ?? {}} canTrain={course.enrolled} />
     </main>
   )
 }

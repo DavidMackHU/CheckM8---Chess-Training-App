@@ -215,3 +215,53 @@ test('days follow the player\'s own time zone', async ({ browser }) => {
   await expect(page.getByTestId('tile-streak')).toContainText(/Current streak\s*1\s*day/)
   await context.close()
 })
+
+test('pick lines on the course page: filter, select, and train just those', async ({ page }) => {
+  const user = await signUp(page, 'pick')
+  const course = await createCourse(page.request, { title: 'PW Pick Course', side: 'WHITE', pgn: SMALL_PGN })
+  await enroll(page.request, course.id)
+  const [first, second, third] = course.lines
+  await page.request.post('/api/train/learned', { data: { lineId: first.id } })
+
+  await page.goto(`/course/${course.slug}`)
+  const rows = page.locator('[data-testid=line-list] li')
+  await expect(rows).toHaveCount(3)
+  await expect(rows.first()).toContainText('Main line')
+
+  await page.selectOption('select[aria-label="Progress"]', 'learning')
+  await expect(rows).toHaveCount(1)
+  await expect(page.getByTestId('line-count')).toHaveText('1 of 3 lines')
+  await page.getByRole('button', { name: 'Clear filters' }).click()
+  // The opponent's reply is what sets each line apart (its last move is shared).
+  await page.fill('input[aria-label="Search lines"]', second.moves[3])
+  await expect(rows).toHaveCount(1)
+  await page.fill('input[aria-label="Search lines"]', '')
+  await page.selectOption('select[aria-label="Style"]', 'tactical')
+  await expect(page.getByTestId('no-lines')).toBeVisible()
+  await page.getByRole('button', { name: 'Clear filters' }).click()
+
+  await page.getByLabel(`Select ${first.name}`).check()
+  await page.getByLabel(`Select ${third.name}`).check()
+  await page.getByTestId('train-selected').click()
+  await expect(page).toHaveURL((url) => url.pathname === `/train/lines/${course.id}` && url.searchParams.get('ids') === `${first.id},${third.id}`)
+
+  // The learned line is reviewed from memory, the new one is taught.
+  await expect(page.getByTestId('session-progress')).toHaveText('Line 1 of 2')
+  await expect(page.locator('h1')).toContainText('review')
+  await playDrillLine(page, first.moves, 'WHITE')
+  await expect(page.getByTestId('line-summary')).toContainText('Line reviewed')
+  await page.getByRole('button', { name: 'Next line' }).click()
+  await expect(page.locator('h1')).toContainText('learn')
+  await playDrillLine(page, third.moves, 'WHITE')
+  await expect(page.getByTestId('line-summary')).toContainText('Session complete!')
+
+  const rowsAfter = await sql<{ order: number; reviews: number }>(
+    `SELECT l."order", (SELECT count(*)::int FROM "ReviewLog" r WHERE r."lineId" = l.id AND r."userId" = u.id AND r.rating > 0) AS reviews
+     FROM "Card" c JOIN "Line" l ON l.id = c."lineId" JOIN "User" u ON u.id = c."userId" WHERE u.username = $1 ORDER BY 1`,
+    [user.name],
+  )
+  expect(rowsAfter).toEqual([
+    { order: first.order, reviews: 1 },
+    { order: third.order, reviews: 0 },
+  ])
+})

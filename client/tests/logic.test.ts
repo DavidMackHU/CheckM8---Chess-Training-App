@@ -2,6 +2,7 @@ import { formatScore, parseInfo, whiteShare } from '../src/lib/chess/engine.ts'
 import { readPgn, sanFor, squaresFor, START_FEN, toPgn } from '../src/lib/chess/game.ts'
 import { formatMoves } from '../src/lib/courses.ts'
 import { courseReplies, type HumanStats, pickReply } from '../src/lib/human.ts'
+import { type LineFilters, matchesFilters, NO_FILTERS, variationOf, variationsOf } from '../src/lib/lineFilters.ts'
 import { addMove, type EditorLine, findNode, linesToTree, mergeLines, patchNode, removeMove, treeToLines } from '../src/lib/moveTree.ts'
 
 const line = (moves: string, extra: Partial<EditorLine> = {}): EditorLine => ({
@@ -190,5 +191,39 @@ describe('engine output', () => {
     expect(whiteShare({ cp: null, mate: -1 })).toBe(0)
     expect(whiteShare({ cp: 100, mate: null })).toBeGreaterThan(55)
     expect(whiteShare({ cp: 5000, mate: null })).toBe(97) // never quite full without a mate
+  })
+})
+
+describe('line filters', () => {
+  const lines = [
+    { id: '1', name: 'Caro-Kann Defense: Panov Attack: ...Nf6, ...e6', moves: ['e4', 'c6', 'd4', 'd5', 'exd5', 'cxd5', 'c4', 'Nf6'], tags: ['main', 'positional'] },
+    { id: '2', name: 'Caro-Kann Defense: Advance Variation: ...Bf5', moves: ['e4', 'c6', 'd4', 'd5', 'e5', 'Bf5'], tags: ['sideline', 'positional'] },
+    { id: '3', name: 'Punish: Caro-Kann Defense: 4. Qh5 (+2.1)', moves: ['e4', 'c6', 'd4', 'd5', 'Qh5', 'dxe4', 'Bc4', 'Nf6+'], tags: ['punish', 'tactical'] },
+  ]
+  const progress = { '1': 'due', '2': 'new', '3': 'new' } as const
+  const ids = (f: Partial<LineFilters>) =>
+    lines.filter((l) => matchesFilters(l, progress[l.id as '1' | '2' | '3'], { ...NO_FILTERS, ...f })).map((l) => l.id)
+
+  it('names the variation without the distinguishing moves or the added-line kind', () => {
+    expect(variationOf(lines[0].name)).toBe('Caro-Kann Defense: Panov Attack')
+    expect(variationOf(lines[2].name)).toBe('Caro-Kann Defense')
+    expect(variationOf('London System')).toBe('London System')
+    expect(variationsOf(lines)).toEqual(['Caro-Kann Defense: Panov Attack', 'Caro-Kann Defense: Advance Variation', 'Caro-Kann Defense'])
+  })
+
+  it('filters by type, style, variation and progress, and combines them', () => {
+    expect(ids({})).toEqual(['1', '2', '3'])
+    expect(ids({ type: 'punish' })).toEqual(['3'])
+    expect(ids({ style: 'positional' })).toEqual(['1', '2'])
+    expect(ids({ variation: 'Caro-Kann Defense: Advance Variation' })).toEqual(['2'])
+    expect(ids({ progress: 'due' })).toEqual(['1'])
+    expect(ids({ style: 'positional', progress: 'new' })).toEqual(['2'])
+  })
+
+  it('searches names, and whole moves ignoring case and check signs', () => {
+    expect(ids({ q: 'panov' })).toEqual(['1'])
+    expect(ids({ q: 'nf6' })).toEqual(['1', '3'])
+    expect(ids({ q: 'Nf6+' })).toEqual(['1', '3'])
+    expect(ids({ q: 'f6' })).toEqual(['1']) // names match any part; moves only whole (line 3 has Nf6+ but no 'f6' in its name)
   })
 })

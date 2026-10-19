@@ -41,7 +41,7 @@ export async function seedCourses(prisma: PrismaClient, contentDir: string): Pro
     const removedLines = await prisma.$transaction(async (tx) => {
       const saved = await tx.course.upsert({ where: { slug }, create: { slug, ...data }, update: data })
       for (const line of lines) {
-        const lineData = { name: line.name, moves: line.moves, comments: line.comments, finalFen: line.finalFen }
+        const lineData = { name: line.name, moves: line.moves, comments: line.comments, finalFen: line.finalFen, tags: line.tags }
         await tx.line.upsert({
           where: { courseId_order: { courseId: saved.id, order: line.order } },
           create: { courseId: saved.id, order: line.order, ...lineData },

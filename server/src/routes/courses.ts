@@ -3,6 +3,7 @@ import { prisma } from '../db.js'
 import type { Prisma } from '../generated/prisma/client.js'
 import { visibleTo } from '../lib/access.js'
 import { optionalAuth, requireAuth } from '../middleware/auth.js'
+import { MASTERED_STABILITY_DAYS } from '../srs/scheduler.js'
 
 export const coursesRouter = Router()
 
@@ -78,6 +79,18 @@ coursesRouter.get('/', async (req, res) => {
 })
 
 // GET /api/courses/:slug  -> course, its lines, and whether the viewer is enrolled
+/** The signed-in user's state for each line they have started: learning, due or mastered. Lines not listed are new. */
+async function lineProgress(userId: string, courseId: string): Promise<Record<string, 'learning' | 'due' | 'mastered'>> {
+  const cards = await prisma.card.findMany({
+    where: { userId, line: { courseId } },
+    select: { lineId: true, due: true, stability: true },
+  })
+  const now = new Date()
+  return Object.fromEntries(
+    cards.map((c) => [c.lineId, c.due <= now ? 'due' : c.stability >= MASTERED_STABILITY_DAYS ? 'mastered' : 'learning'] as const),
+  )
+}
+
 coursesRouter.get('/:slug', optionalAuth, async (req, res) => {
   const course = await prisma.course.findFirst({
     where: { slug: String(req.params.slug), ...visibleTo(req.userId) },
@@ -89,7 +102,7 @@ coursesRouter.get('/:slug', optionalAuth, async (req, res) => {
       authorId: true,
       lines: {
         orderBy: { order: 'asc' },
-        select: { id: true, order: true, name: true, moves: true, finalFen: true },
+        select: { id: true, order: true, name: true, moves: true, finalFen: true, tags: true },
       },
     },
   })
@@ -114,7 +127,8 @@ coursesRouter.get('/:slug', optionalAuth, async (req, res) => {
 
   const { lines, description, startFen, isPublic, authorId, ...card } = course
   const isOwner = !!req.userId && authorId === req.userId
-  res.json({ course: { ...toCard(card), description, startFen, enrolled, upvoted, isPublic, isOwner }, lines })
+  const progress = req.userId ? await lineProgress(req.userId, course.id) : {}
+  res.json({ course: { ...toCard(card), description, startFen, enrolled, upvoted, isPublic, isOwner }, lines, progress })
 })
 
 // GET /api/courses/:slug/first-line  -> guest preview: line 1 with its comments
