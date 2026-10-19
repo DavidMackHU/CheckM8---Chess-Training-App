@@ -11,8 +11,6 @@ export type User = {
   createdAt: string
 }
 
-export type Credentials = { email: string; password: string; username?: string }
-
 const ME_KEY = ['auth', 'me'] as const
 
 /** The signed-in user, or null for guests. */
@@ -32,24 +30,17 @@ export function useCurrentUser() {
   })
 }
 
-function useAuthMutation(path: '/auth/login' | '/auth/register') {
+/**
+ * Runs a sign-in (see lib/firebase.ts) and stores the signed-in user.
+ * The action resolves to null when the user backed out, e.g. closed the Google window.
+ */
+export function useSignIn() {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (credentials: Credentials) => apiPost<{ user: User }>(path, credentials),
-    onSuccess: ({ user }) => queryClient.setQueryData(ME_KEY, user),
-  })
-}
-
-export const useLogin = () => useAuthMutation('/auth/login')
-export const useRegister = () => useAuthMutation('/auth/register')
-
-/** Which extra sign-in methods the server has been set up for. */
-export function useAuthProviders() {
-  return useQuery({
-    queryKey: ['auth', 'providers'],
-    queryFn: () => apiGet<{ google: boolean }>('/auth/providers'),
-    staleTime: Infinity,
-    retry: false,
+    mutationFn: (action: () => Promise<User | null>) => action(),
+    onSuccess: (user) => {
+      if (user) queryClient.setQueryData(ME_KEY, user)
+    },
   })
 }
 

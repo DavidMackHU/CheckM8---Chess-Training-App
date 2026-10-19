@@ -13,9 +13,10 @@ model User {
   id             String    @id @default(cuid())
   email          String    @unique
   username       String    @unique
-  /// Null for accounts that only sign in with Google.
+  /// Only for accounts made before Firebase, until their first sign-in moves them over.
   passwordHash   String?
-  googleId       String?   @unique
+  /// Firebase Authentication user id. Firebase holds the password or Google link.
+  firebaseUid    String?   @unique
   xp             Int       @default(0)
   streak         Int       @default(0)
   lastActiveDate DateTime?

@@ -1,7 +1,7 @@
 import { parseCourseFile } from '../src/content/courseFile.js'
 import { cleanLines, keyPosition, START_FEN } from '../src/content/lines.js'
 import { parsePgn } from '../src/content/pgn.js'
-import { parseLogin, parseRegister } from '../src/lib/validation.js'
+import { parseLogin } from '../src/lib/validation.js'
 
 const show = (lines: { moves: string[] }[]) => lines.map((l) => l.moves.join(' ')).join(' | ')
 
@@ -115,24 +115,7 @@ describe('parseCourseFile', () => {
   })
 })
 
-describe('sign-up and login validation', () => {
-  it('normalises a valid registration', () => {
-    const result = parseRegister({ email: '  Me@Example.com ', username: 'player_1', password: 'password123' })
-    expect(result).toEqual({ ok: true, data: { email: 'me@example.com', username: 'player_1', password: 'password123' } })
-  })
-
-  it.each([
-    [{ email: 'nope', username: 'player_1', password: 'password123' }, 'valid email'],
-    [{ email: 'a@b.co', username: 'x', password: 'password123' }, 'Username must be'],
-    [{ email: 'a@b.co', username: 'bad name!', password: 'password123' }, 'Username must be'],
-    [{ email: 'a@b.co', username: 'player_1', password: 'short' }, 'Password must be'],
-    [null, 'valid email'],
-  ])('rejects registration %j', (body, message) => {
-    const result = parseRegister(body)
-    expect(result.ok).toBe(false)
-    if (!result.ok) expect(result.error).toContain(message)
-  })
-
+describe('login validation', () => {
   it('requires both fields to log in', () => {
     expect(parseLogin({ email: 'A@B.co', password: 'x' })).toEqual({ ok: true, data: { email: 'a@b.co', password: 'x' } })
     expect(parseLogin({ email: 'a@b.co' }).ok).toBe(false)

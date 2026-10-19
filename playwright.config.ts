@@ -40,15 +40,16 @@ export default defineConfig({
       env: {
         // The tests sign up many accounts quickly; lift the sign-up rate limit for this run.
         AUTH_RATE_LIMIT: '100000',
-        // Google sign-in is pointed at e2e/fake-google.mjs. These are not real credentials.
-        GOOGLE_CLIENT_ID: 'e2e-client-id',
-        GOOGLE_CLIENT_SECRET: 'e2e-client-secret',
-        GOOGLE_TOKEN_URL: 'http://localhost:5999/token',
-        PUBLIC_URL: 'http://localhost:5173',
+        // Sign-in is pointed at e2e/fake-auth.mjs, which plays Firebase. None of these are real.
+        FIREBASE_PROJECT_ID: 'e2e-project',
+        FIREBASE_JWKS_URL: 'http://localhost:5999/jwks',
+        VITE_FIREBASE_API_KEY: 'e2e-api-key',
+        VITE_FIREBASE_AUTH_DOMAIN: 'localhost',
+        VITE_FIREBASE_PROJECT_ID: 'e2e-project',
       },
     },
     {
-      command: 'node e2e/fake-google.mjs',
+      command: 'node e2e/fake-auth.mjs',
       url: 'http://localhost:5999',
       reuseExistingServer: !process.env.CI,
     },

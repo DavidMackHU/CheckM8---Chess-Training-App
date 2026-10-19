@@ -1,6 +1,7 @@
 import { type APIRequestContext, type Browser, expect, type Page } from '@playwright/test'
 import { Chess } from 'chess.js'
 import pg from 'pg'
+import { mintToken } from './fakeFirebase.ts'
 
 export const START_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
 const DATABASE_URL =
@@ -17,14 +18,21 @@ export async function sql<T extends pg.QueryResultRow = pg.QueryResultRow>(text:
   }
 }
 
-export type TestUser = { name: string; email: string; password: string }
+export type TestUser = { name: string; email: string }
 
-/** Registers a fresh account through the API. The page's browser context is then signed in. */
+/** A fresh test username (test users all start with pw_, see global-teardown.ts). */
+export const testName = (tag: string) => `pw_${tag}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`.slice(0, 20)
+
+/**
+ * Creates a fresh account through the API, as if it had just signed up with
+ * Firebase (see e2e/fake-auth.mjs). The page's browser context is then signed in.
+ */
 export async function signUp(page: Page, tag = 'u'): Promise<TestUser> {
-  const name = `pw_${tag}_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`.slice(0, 20)
-  const user = { name, email: `${name}@example.com`, password: 'password123' }
-  const res = await page.request.post('/api/auth/register', { data: { email: user.email, username: name, password: user.password } })
-  expect(res.status(), 'sign-up should succeed').toBe(201)
+  const name = testName(tag)
+  const user = { name, email: `${name}@example.com` }
+  const idToken = await mintToken({ email: user.email })
+  const res = await page.request.post('/api/auth/firebase', { data: { idToken, username: name } })
+  expect(res.status(), 'sign-up should succeed').toBe(200)
   return user
 }
 
