@@ -16,6 +16,7 @@
     "docker:down": "docker compose --profile full down",
     "db:push": "npm run db:push -w server",
     "generate-course": "tsx scripts/generate-course.ts",
+    "find-mates": "tsx scripts/find-mates.ts",
     "db:seed": "npm run db:seed -w server",
     "test": "jest",
     "test:e2e": "playwright test",

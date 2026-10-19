@@ -13,12 +13,13 @@ export type ExplorerResponse = {
 }
 
 /**
- * The three data sets the generator reads:
+ * The data sets the content tools read:
  *  - masters: over-the-board master games (picks the user's moves)
  *  - strong:  Lichess games rated 2200+ (fallback when masters has no data)
  *  - club:    Lichess games rated 1400-2000 (decides which replies to prepare for)
+ *  - casual:  Lichess games rated 1000-1200 (where opening blunders are common; used by find-mates)
  */
-export type Db = 'masters' | 'strong' | 'club'
+export type Db = 'masters' | 'strong' | 'club' | 'casual'
 
 export interface Explorer {
   /** `play` is the full move list in UCI from the standard starting position. */
@@ -33,7 +34,7 @@ const LICHESS_PARAMS = 'variant=standard&speeds=blitz,rapid,classical'
 function urlFor(db: Db, play: string[]): string {
   const moves = `play=${play.join(',')}`
   if (db === 'masters') return `${HOST}/masters?${moves}`
-  const ratings = db === 'strong' ? '2200,2500' : '1400,1600,1800,2000'
+  const ratings = db === 'strong' ? '2200,2500' : db === 'casual' ? '1000,1200' : '1400,1600,1800,2000'
   return `${HOST}/lichess?${LICHESS_PARAMS}&ratings=${ratings}&${moves}`
 }
 
@@ -84,7 +85,15 @@ export function createLichessExplorer({ token, cacheDir, delayMs = 2700, log = (
       )
     }
     for (let attempt = 1; attempt <= 30; attempt++) {
-      const res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' } })
+      let res: Response
+      try {
+        res = await fetch(url, { headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' } })
+      } catch (err) {
+        // A dropped or timed-out connection: wait and try again rather than lose the run.
+        log(`Network error (${err instanceof Error ? err.message : String(err)}). Retrying in 15s...`)
+        await sleep(15_000)
+        continue
+      }
       if (res.status === 429) {
         log(`Rate limited by Lichess. Waiting 60s (attempt ${attempt} of 30)...`)
         await sleep(60_000)

@@ -135,7 +135,8 @@ All official courses are generated from public data and annotated by us. We neve
 2. **Review** — open the PGN, prune lines that are too long, redundant, or unplayable; target 25–60 lines per course.
 3. **Annotate** — add a one-line comment at key moments in each line (the plan, the trap, the pawn break). An LLM may draft comments from engine evals; a human edits every one.
 4. **Write the pitch** — one punchy sentence + 2-sentence description per course, in our own voice.
-5. **Seed** — `prisma/seed.ts` reads every `content/*.json` and upserts `Course` + `Line` rows by slug (idempotent, safe to re-run).
+5. **Checkmate lines** — `npm run find-mates -- --course <slug> --write` adds lines where a real-game opponent mistake allows a forced mate, found with Stockfish in Node and checked to end in checkmate. Named "Checkmate: ...", appended after the generated lines.
+6. **Seed** — `prisma/seed.ts` reads every `content/*.json` and upserts `Course` + `Line` rows by slug (idempotent, safe to re-run).
 
 **Starter courses (v1):**
 ```bash
