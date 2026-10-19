@@ -20,8 +20,7 @@ model User {
   xp             Int       @default(0)
   streak         Int       @default(0)
   lastActiveDate DateTime?
-  dailyNewLimit  Int       @default(5)
-  /// IANA time zone from the player's browser. Their days (streak, heatmap, daily limit) follow it.
+  /// IANA time zone from the player's browser. Their days (streak, heatmap) follow it.
   timeZone       String    @default("UTC")
   createdAt      DateTime  @default(now())
   courses        Course[]

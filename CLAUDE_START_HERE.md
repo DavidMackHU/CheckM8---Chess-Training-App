@@ -28,7 +28,7 @@ Before doing anything else:
 | 4 | Chess board core (chess.js + react-chessboard) | ✅ | Move validation, flip board, arrows, sounds. Try it at `/analysis` (free board, no engine yet) |
 | 5 | Data models + course generator + seed | ✅ | `npm run generate-course` → `content/*.json` → `npm run db:seed`. 5 starter courses generated (60 lines each, ~10 moves deep). **Still to do by hand:** prune lines, write pitch, description and comments (see `content/README.md`) |
 | 6 | Course catalog + course detail pages | ✅ | Cards with board thumbnail, side, line count. Catalog on `/` and `/openings`, detail on `/course/:slug`, enroll works |
-| 7 | Learn mode | ✅ | The move stays hidden until the user taps **Show hint** (arrow, move name, comment). Guests: `/course/:slug/try`. Members: `/train/learn/:courseId`, limited by the daily new-line allowance |
+| 7 | Learn mode | ✅ | The move stays hidden until the user taps **Show hint** (arrow, move name, comment). Guests: `/course/:slug/try`. Members: `/train/learn/:courseId`, 5 lines per session with "Learn more" to continue. No daily limit (removed 2026-10-19) |
 | 8 | Spaced repetition engine (ts-fsrs) | ✅ | One card per line. Learned lines are due next day; `POST /api/train/result` grades and reschedules. Logic in `server/src/srs/scheduler.ts` |
 | 9 | Review mode (due queue) | ✅ | From memory; a wrong move or a hint counts as a mistake → "Again". A wrong move no longer reveals the answer. `/train/review` serves due lines across all courses, most overdue first, 30 per session |
 | 10 | Progress dashboard | ✅ | Due today, mastered %, streak, heatmap. `/dashboard`, fed by `GET /api/stats/me`. Days follow the player's own time zone (browser sends `X-Time-Zone`; saved on the user for leaderboard streaks) |
@@ -114,7 +114,7 @@ A web app that helps chess players memorize opening repertoires. Users pick a co
    - Clean, slow (> 5s on any move) → Hard
    - Clean → Good
    - Clean + fast (< 2s avg) → Easy
-   FSRS schedules the next due date. Optional daily new-line limit (default 5).
+   FSRS schedules the next due date. New lines have no daily limit; learn sessions hold 5 at a time.
 5. **Dashboard** — Lines due today, new lines available, mastered %, current streak, 12-week activity heatmap, per-course progress bars.
 6. **XP, streaks, leaderboards** — XP per reviewed line (more for clean). Daily streak if ≥ 1 review. Weekly and all-time leaderboards.
 7. **Course creator** — Import PGN (with variations/comments) or build the move tree by playing on the board. Choose side. Each leaf = one line. Private by default; publish to community.
@@ -174,7 +174,7 @@ Hand-added fields (merged by the seed if present): `slug`, `description`, `pitch
 ### User Flow
 1. Landing → browse catalog → "Try the first line" (guest)
 2. Finish line → prompt to sign up to save progress
-3. Sign up → enroll in course → Learn 5 new lines
+3. Sign up → enroll in course → Learn a session of 5 new lines (more if they like)
 4. Next day → dashboard shows due lines → Review → XP + streak
 5. Later → create own course from PGN → publish to community
 
@@ -210,7 +210,7 @@ Hand-added fields (merged by the seed if present): `slug`, `description`, `pitch
 ```
 User        id, email (unique), username (unique), firebaseUid (unique),
             passwordHash (pre-Firebase accounts only), xp, streak,
-            lastActiveDate, dailyNewLimit (default 5), createdAt
+            lastActiveDate, timeZone (default UTC), createdAt
 Course      id, slug (unique), title, pitch, description, side (WHITE|BLACK),
             difficulty (BEGINNER|INTERMEDIATE|ADVANCED), keyMoves (string[]),
             keyFen (thumbnail position), source (GENERATED|PGN|MANUAL),

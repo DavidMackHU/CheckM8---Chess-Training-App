@@ -1,7 +1,7 @@
 /**
- * Day arithmetic for streaks, the activity heatmap and the daily new-line
- * allowance. Days are calendar days in the player's own time zone (an IANA
- * name such as "America/Chicago"), written "YYYY-MM-DD". UTC when unknown.
+ * Day arithmetic for streaks and the activity heatmap. Days are calendar days
+ * in the player's own time zone (an IANA name such as "America/Chicago"),
+ * written "YYYY-MM-DD". UTC when unknown.
  */
 
 const formatters = new Map<string, Intl.DateTimeFormat>()

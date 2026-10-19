@@ -82,14 +82,12 @@ export default function Dashboard() {
 
         <Tile label="New lines available" testId="tile-new">
           <Big>{stats.newAvailable}</Big>
-          {stats.newLeftToday > 0 && nextNewCourse ? (
+          {nextNewCourse ? (
             <Link to={`/train/learn/${nextNewCourse.id}`} className="self-start text-sm text-emerald-400 hover:underline">
-              Learn {stats.newLeftToday} today
+              Learn new lines
             </Link>
           ) : (
-            <p className="text-sm text-slate-500">
-              {stats.newAvailable > 0 ? `Daily limit of ${stats.dailyNewLimit} reached.` : 'Nothing new to learn.'}
-            </p>
+            <p className="text-sm text-slate-500">Nothing new to learn.</p>
           )}
         </Tile>
 

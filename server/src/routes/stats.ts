@@ -3,7 +3,7 @@ import { prisma } from '../db.js'
 import { visibleTo } from '../lib/access.js'
 import { requireAuth } from '../middleware/auth.js'
 import { MASTERED_STABILITY_DAYS } from '../srs/scheduler.js'
-import { currentStreak, dayKey, lastDays } from '../srs/activity.js'
+import { currentStreak, lastDays } from '../srs/activity.js'
 
 export const statsRouter = Router()
 statsRouter.use(requireAuth)
@@ -20,7 +20,7 @@ statsRouter.get('/me', async (req, res) => {
   const zone = req.timeZone
 
   const [user, enrollments, cardStats, reviewDays, learnDays] = await Promise.all([
-    prisma.user.findUnique({ where: { id: userId }, select: { dailyNewLimit: true, xp: true } }),
+    prisma.user.findUnique({ where: { id: userId }, select: { xp: true } }),
     prisma.enrollment.findMany({
       where: { userId, course: visibleTo(userId) },
       orderBy: { createdAt: 'asc' },
@@ -78,15 +78,10 @@ statsRouter.get('/me', async (req, res) => {
 
   const sum = (field: 'total' | 'learned' | 'mastered' | 'due' | 'new') => courses.reduce((n, c) => n + c[field], 0)
   const total = sum('total')
-  const today = activity.get(dayKey(now, zone))
-  const dailyNewLimit = user?.dailyNewLimit ?? 5
-  const newLeftToday = Math.max(0, dailyNewLimit - (today?.learned ?? 0))
 
   res.json({
     due: sum('due'),
     newAvailable: sum('new'),
-    newLeftToday: Math.min(newLeftToday, sum('new')),
-    dailyNewLimit,
     learned: sum('learned'),
     mastered: sum('mastered'),
     totalLines: total,

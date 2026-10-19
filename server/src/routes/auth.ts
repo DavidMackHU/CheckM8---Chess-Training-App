@@ -19,8 +19,8 @@ const limiter = rateLimit({
 })
 
 export function publicUser(user: User) {
-  const { id, email, username, xp, streak, dailyNewLimit, createdAt } = user
-  return { id, email, username, xp, streak, dailyNewLimit, createdAt }
+  const { id, email, username, xp, streak, createdAt } = user
+  return { id, email, username, xp, streak, createdAt }
 }
 
 /**

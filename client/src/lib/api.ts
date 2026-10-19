@@ -11,7 +11,7 @@ export class ApiError extends Error {
   }
 }
 
-/** Streaks, the heatmap and the daily allowance follow the player's own days. */
+/** Streaks and the heatmap follow the player's own days. */
 const TIME_ZONE = (() => {
   try {
     return Intl.DateTimeFormat().resolvedOptions().timeZone

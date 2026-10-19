@@ -21,7 +21,7 @@ function Message({ title, body, to, linkText }: { title: string; body?: string; 
 }
 
 /** Plays through the session's lines one at a time, saving each as it is finished. */
-function Session({ session }: { session: LearnSession }) {
+function Session({ session, onMore }: { session: LearnSession; onMore: () => void }) {
   const { course, lines } = session
   const [index, setIndex] = useState(0)
   const [result, setResult] = useState<DrillResult | null>(null)
@@ -76,16 +76,24 @@ function Session({ session }: { session: LearnSession }) {
             </p>
           )}
           {isLast ? (
-            <>
-              <Link to={`/course/${course.slug}`} className={primary}>
-                Back to the course
-              </Link>
-              <p className="w-full text-sm text-slate-500">
-                {leftAfterSession > 0
-                  ? `${leftAfterSession} more new lines are waiting for another day.`
-                  : 'You have learned every line in this course.'}
-              </p>
-            </>
+            leftAfterSession > 0 ? (
+              <>
+                <button type="button" className={primary} onClick={onMore}>
+                  Learn {Math.min(leftAfterSession, session.lines.length)} more
+                </button>
+                <Link to={`/course/${course.slug}`} className={secondary}>
+                  Back to the course
+                </Link>
+                <p className="w-full text-sm text-slate-500">{leftAfterSession} new lines left in this course.</p>
+              </>
+            ) : (
+              <>
+                <Link to={`/course/${course.slug}`} className={primary}>
+                  Back to the course
+                </Link>
+                <p className="w-full text-sm text-slate-500">You have learned every line in this course.</p>
+              </>
+            )
           ) : (
             <button
               type="button"
@@ -119,9 +127,9 @@ function Session({ session }: { session: LearnSession }) {
 /** Learn mode at /train/learn/:courseId. Requires an account and enrollment. */
 export default function Learn() {
   const { courseId = '' } = useParams()
-  const { data, isPending, error } = useLearnSession(courseId)
+  const { data, isPending, error, refetch, isFetching } = useLearnSession(courseId)
 
-  if (isPending) return <p className="py-24 text-center text-slate-400">Loading your lines...</p>
+  if (isPending || isFetching) return <p className="py-24 text-center text-slate-400">Loading your lines...</p>
 
   if (error) {
     const status = error instanceof ApiError ? error.status : 0
@@ -132,20 +140,16 @@ export default function Learn() {
   }
 
   if (data.lines.length === 0) {
-    const finished = data.newInCourse === 0
     return (
       <Message
-        title={finished ? 'Course complete' : 'Daily limit reached'}
-        body={
-          finished
-            ? `You have learned all ${data.totalInCourse} lines of ${data.course.title}.`
-            : `You have learned ${data.learnedToday} new lines today, which is your daily limit of ${data.dailyNewLimit}. ${data.newInCourse} more are waiting tomorrow.`
-        }
+        title="Course complete"
+        body={`You have learned all ${data.totalInCourse} lines of ${data.course.title}.`}
         to={`/course/${data.course.slug}`}
         linkText="Back to the course"
       />
     )
   }
 
-  return <Session session={data} />
+  // Keyed by the first line, so a fresh batch starts a fresh session.
+  return <Session key={data.lines[0].id} session={data} onMore={() => void refetch()} />
 }

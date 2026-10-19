@@ -60,18 +60,28 @@ test('learn mode: hints, a wrong move, comments, and a saved session', async ({ 
   await expect(page.getByText('Course complete')).toBeVisible()
 })
 
-test('the daily limit caps how many new lines are offered', async ({ page }) => {
+test('there is no daily limit: after a session of five, more follow at once', async ({ page }) => {
   await signUp(page, 'lim')
-  const course = await createCourse(page.request, { title: 'PW Limit Course', side: 'WHITE', pgn: SMALL_PGN })
+  // Six short lines of two White moves each.
+  const pgn = '1. d4 d5 2. c4 (2. Bf4) (2. Nf3) (2. e3) (2. g3) (2. Nc3) *'
+  const course = await createCourse(page.request, { title: 'PW Batch Course', side: 'WHITE', pgn })
+  expect(course.lines).toHaveLength(6)
   await enroll(page.request, course.id)
-  for (const line of course.lines.slice(0, 2)) await page.request.post('/api/train/learned', { data: { lineId: line.id } })
 
-  const london = await (await page.request.get('/api/courses/london-system')).json()
-  await enroll(page.request, london.course.id)
-  const session = await (await page.request.get(`/api/train/learn/${london.course.id}`)).json()
-  expect(session.learnedToday).toBe(2)
-  expect(session.lines).toHaveLength(3) // five a day, two already used
-  expect(session.newInCourse).toBe(60)
+  await page.goto(`/train/learn/${course.id}`)
+  for (let i = 0; i < 5; i++) {
+    await expect(page.getByTestId('session-progress')).toHaveText(`New line ${i + 1} of 5`)
+    await playDrillLine(page, course.lines[i].moves, 'WHITE')
+    if (i < 4) await page.getByRole('button', { name: 'Next line' }).click()
+  }
+  await expect(page.getByTestId('line-summary')).toContainText('1 new lines left in this course.')
+  await page.getByRole('button', { name: 'Learn 1 more' }).click()
+  await expect(page.getByTestId('session-progress')).toHaveText('New line 1 of 1')
+  await playDrillLine(page, course.lines[5].moves, 'WHITE')
+  await expect(page.getByTestId('line-summary')).toContainText('every line in this course')
+
+  const stats = await (await page.request.get('/api/stats/me')).json()
+  expect(stats.learned).toBe(6) // six in one day, past the old limit of five
 })
 
 test('review mode: no hints, a miss reveals the move, grades and XP are saved', async ({ page }) => {

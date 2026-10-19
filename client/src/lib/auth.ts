@@ -7,7 +7,6 @@ export type User = {
   username: string
   xp: number
   streak: number
-  dailyNewLimit: number
   createdAt: string
 }
 

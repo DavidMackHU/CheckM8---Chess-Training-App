@@ -2,7 +2,6 @@ import { Router } from 'express'
 import { prisma } from '../db.js'
 import { visibleTo } from '../lib/access.js'
 import { requireAuth } from '../middleware/auth.js'
-import { startOfDay } from '../srs/activity.js'
 import { RATING_LEARNED, recordActivity, XP_LEARNED, XP_REVIEW } from '../srs/progress.js'
 import { gradeDrill, gradeToNumber, scheduleLearned, scheduleReview } from '../srs/scheduler.js'
 
@@ -12,17 +11,10 @@ trainRouter.use(requireAuth)
 /** Most lines served in one review session. More stay queued for the next one. */
 const REVIEW_BATCH = 30
 
-/** How many more new lines the user may learn today (their own day), across all courses. */
-async function newLinesLeftToday(userId: string, zone: string): Promise<{ left: number; learnedToday: number; limit: number }> {
-  const [user, learnedToday] = await Promise.all([
-    prisma.user.findUnique({ where: { id: userId }, select: { dailyNewLimit: true } }),
-    prisma.card.count({ where: { userId, createdAt: { gte: startOfDay(new Date(), zone) } } }),
-  ])
-  const limit = user?.dailyNewLimit ?? 5
-  return { left: Math.max(0, limit - learnedToday), learnedToday, limit }
-}
+/** New lines per learn session. Not a limit: the player can start another session straight away. */
+const LEARN_BATCH = 5
 
-// GET /api/train/learn/:courseId  -> the next new lines for this course, up to today's allowance
+// GET /api/train/learn/:courseId  -> the next few new lines for this course
 trainRouter.get('/learn/:courseId', async (req, res) => {
   const userId = req.userId!
   const courseId = String(req.params.courseId)
@@ -44,13 +36,12 @@ trainRouter.get('/learn/:courseId', async (req, res) => {
     return
   }
 
-  const allowance = await newLinesLeftToday(userId, req.timeZone)
   const unlearned = { courseId, cards: { none: { userId } } }
   const [lines, newInCourse, totalInCourse] = await Promise.all([
     prisma.line.findMany({
       where: unlearned,
       orderBy: { order: 'asc' },
-      take: allowance.left,
+      take: LEARN_BATCH,
       select: { id: true, order: true, name: true, moves: true, comments: true, finalFen: true },
     }),
     prisma.line.count({ where: unlearned }),
@@ -62,8 +53,6 @@ trainRouter.get('/learn/:courseId', async (req, res) => {
     lines,
     newInCourse,
     totalInCourse,
-    learnedToday: allowance.learnedToday,
-    dailyNewLimit: allowance.limit,
   })
 })
 

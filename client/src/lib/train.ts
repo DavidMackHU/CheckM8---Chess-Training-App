@@ -19,11 +19,9 @@ export type LearnSession = {
   lines: DrillLine[]
   newInCourse: number
   totalInCourse: number
-  learnedToday: number
-  dailyNewLimit: number
 }
 
-/** New lines to learn in a course, limited by the user's daily allowance. */
+/** The next few new lines to learn in a course. */
 export function useLearnSession(courseId: string) {
   return useQuery({
     queryKey: ['learn', courseId],

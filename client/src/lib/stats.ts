@@ -19,8 +19,6 @@ export type CourseProgress = {
 export type Stats = {
   due: number
   newAvailable: number
-  newLeftToday: number
-  dailyNewLimit: number
   learned: number
   mastered: number
   totalLines: number
