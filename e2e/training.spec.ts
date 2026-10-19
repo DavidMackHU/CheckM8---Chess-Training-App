@@ -80,8 +80,8 @@ test('there is no daily limit: after a session of five, more follow at once', as
   await playDrillLine(page, course.lines[5].moves, 'WHITE')
   await expect(page.getByTestId('line-summary')).toContainText('every line in this course')
 
-  const stats = await (await page.request.get('/api/stats/me')).json()
-  expect(stats.learned).toBe(6) // six in one day, past the old limit of five
+  // Six in one day, past the old limit of five. The last save may still be in flight.
+  await expect.poll(async () => (await (await page.request.get('/api/stats/me')).json()).learned).toBe(6)
 })
 
 test('review mode: no hints, a miss reveals the move, grades and XP are saved', async ({ page }) => {

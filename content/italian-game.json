@@ -11,7 +11,7 @@
     "Bc4"
   ],
   "keyFen": "r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 3 3",
-  "lineCount": 60,
+  "lineCount": 70,
   "lines": [
     {
       "order": 1,
@@ -1632,6 +1632,308 @@
       ],
       "finalFen": "r2q1rk1/1pp2pp1/p1npBn1p/2b1p3/P3P3/2PP1N1P/1P3PP1/RNBQR1K1 b - - 0 10",
       "frequency": 0.0022
+    },
+    {
+      "order": 61,
+      "name": "Checkmate: Italian Game: 8... Kg8 (mate in 3)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Nf6",
+        "d3",
+        "d6",
+        "Ng5",
+        "d5",
+        "exd5",
+        "Nxd5",
+        "Nxf7",
+        "Kxf7",
+        "Qf3+",
+        "Kg8",
+        "Bxd5+",
+        "Qxd5",
+        "Qxd5+",
+        "Be6",
+        "Qxe6#"
+      ],
+      "finalFen": "r4bkr/ppp3pp/2n1Q3/4p3/8/3P4/PPP2PPP/RNB1K2R b KQ - 0 11",
+      "frequency": 0.17445260217009942,
+      "comments": {
+        "16": "A mistake played in 17% of games here. You have a forced mate in 3.",
+        "21": "Checkmate."
+      }
+    },
+    {
+      "order": 62,
+      "name": "Checkmate: Italian Game: 8... d6 (mate in 8)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "h6",
+        "d4",
+        "exd4",
+        "Nxd4",
+        "Nxd4",
+        "Qxd4",
+        "Qf6",
+        "e5",
+        "Qb6",
+        "Qf4",
+        "d6",
+        "Qxf7+",
+        "Kd8",
+        "Qxf8+",
+        "Kd7",
+        "e6+",
+        "Kc6",
+        "Qf3+",
+        "Kc5",
+        "Qd5+",
+        "Kb4",
+        "Bd2+",
+        "Ka4",
+        "Bb3+",
+        "Qxb3",
+        "axb3#"
+      ],
+      "finalFen": "r1b3nr/ppp3p1/3pP2p/3Q4/k7/1P6/1PPB1PPP/RN2K2R b KQ - 0 16",
+      "frequency": 0.01800450112528132,
+      "comments": {
+        "16": "A mistake played in 2% of games here. You have a forced mate in 8.",
+        "31": "Checkmate."
+      }
+    },
+    {
+      "order": 63,
+      "name": "Checkmate: Italian Game: 9... Kd6 (mate in 3)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Nf6",
+        "d3",
+        "d6",
+        "Ng5",
+        "d5",
+        "exd5",
+        "Nxd5",
+        "Nxf7",
+        "Kxf7",
+        "Qf3+",
+        "Ke6",
+        "Nc3",
+        "Kd6",
+        "Qxd5+",
+        "Ke7",
+        "Bg5+",
+        "Ke8",
+        "Qf7#"
+      ],
+      "finalFen": "r1bqkb1r/ppp2Qpp/2n5/4p1B1/2B5/2NP4/PPP2PPP/R3K2R b KQ - 4 12",
+      "frequency": 0.007323026851098454,
+      "comments": {
+        "18": "A mistake played in 1% of games here. You have a forced mate in 3.",
+        "23": "Checkmate."
+      }
+    },
+    {
+      "order": 64,
+      "name": "Checkmate: Italian Game: 7... Bf6 (mate in 1)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "d6",
+        "d4",
+        "Be7",
+        "dxe5",
+        "Nxe5",
+        "Nxe5",
+        "dxe5",
+        "Qh5",
+        "Bf6",
+        "Qxf7#"
+      ],
+      "finalFen": "r1bqk1nr/ppp2Qpp/5b2/4p3/2B1P3/8/PPP2PPP/RNB1K2R b KQkq - 0 8",
+      "frequency": 0.014008620689655173,
+      "comments": {
+        "14": "A mistake played in 1% of games here. You have a forced mate in 1.",
+        "15": "Checkmate."
+      }
+    },
+    {
+      "order": 65,
+      "name": "Punish: Italian Game: 5... Be6 (+3.0)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "Nf6",
+        "d3",
+        "d6",
+        "Ng5",
+        "Be6",
+        "Nxe6",
+        "fxe6",
+        "Bxe6",
+        "Qe7",
+        "Bh3"
+      ],
+      "finalFen": "r3kb1r/ppp1q1pp/2np1n2/4p3/4P3/3P3B/PPP2PPP/RNBQK2R b KQkq - 2 8",
+      "frequency": 0.4104664451075961,
+      "comments": {
+        "10": "A common mistake, played in 41% of games here. Find the move that punishes it.",
+        "15": "You are clearly better now: about +3.0 by the engine."
+      }
+    },
+    {
+      "order": 66,
+      "name": "Punish: Italian Game: 4... Nf6 (+2.6)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "h6",
+        "d4",
+        "Nf6",
+        "Nxe5",
+        "d5",
+        "exd5",
+        "Nxd5",
+        "O-O"
+      ],
+      "finalFen": "r1bqkb1r/ppp2pp1/2n4p/3nN3/2BP4/8/PPP2PPP/RNBQ1RK1 b kq - 1 7",
+      "frequency": 0.05788526681862397,
+      "comments": {
+        "8": "A common mistake, played in 6% of games here. Find the move that punishes it.",
+        "13": "You are clearly better now: about +2.6 by the engine."
+      }
+    },
+    {
+      "order": 67,
+      "name": "Punish: Italian Game: 4... Be6 (+5.7)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "d6",
+        "d4",
+        "Be6",
+        "d5",
+        "Bd7",
+        "dxc6",
+        "Bxc6",
+        "Qe2"
+      ],
+      "finalFen": "r2qkbnr/ppp2ppp/2bp4/4p3/2B1P3/5N2/PPP1QPPP/RNB1K2R b KQkq - 1 7",
+      "frequency": 0.09130427114555925,
+      "comments": {
+        "8": "A common mistake, played in 9% of games here. Find the move that punishes it.",
+        "13": "You are clearly better now: about +5.7 by the engine."
+      }
+    },
+    {
+      "order": 68,
+      "name": "Punish: Italian Game: 6... b6 (+5.4)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "h6",
+        "d4",
+        "exd4",
+        "Nxd4",
+        "Nxd4",
+        "Qxd4",
+        "b6",
+        "Qd5",
+        "Bb4+",
+        "c3",
+        "Qh4",
+        "Qxa8"
+      ],
+      "finalFen": "Q1b1k1nr/p1pp1pp1/1p5p/8/1bB1P2q/2P5/PP3PPP/RNB1K2R b KQk - 0 9",
+      "frequency": 0.07166876192536249,
+      "comments": {
+        "12": "A common mistake, played in 7% of games here. Find the move that punishes it.",
+        "17": "You are clearly better now: about +5.4 by the engine."
+      }
+    },
+    {
+      "order": 69,
+      "name": "Punish: Italian Game: 5... Nxe5 (+3.3)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "h6",
+        "d4",
+        "d6",
+        "dxe5",
+        "Nxe5",
+        "Nxe5",
+        "dxe5",
+        "Bxf7+",
+        "Ke7",
+        "Qf3"
+      ],
+      "finalFen": "r1bq1bnr/ppp1kBp1/7p/4p3/4P3/5Q2/PPP2PPP/RNB1K2R b KQ - 2 8",
+      "frequency": 0.2466339439216707,
+      "comments": {
+        "10": "A common mistake, played in 25% of games here. Find the move that punishes it.",
+        "15": "You are clearly better now: about +3.3 by the engine."
+      }
+    },
+    {
+      "order": 70,
+      "name": "Punish: Italian Game: 7... c5 (+2.9)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nf3",
+        "Nc6",
+        "Bc4",
+        "h6",
+        "d4",
+        "exd4",
+        "Nxd4",
+        "Nf6",
+        "Nc3",
+        "Nxd4",
+        "Qxd4",
+        "c5",
+        "Qd3",
+        "a6",
+        "Bf4",
+        "b5",
+        "Bd5"
+      ],
+      "finalFen": "r1bqkb1r/3p1pp1/p4n1p/1ppB4/4PB2/2NQ4/PPP2PPP/R3K2R b KQkq - 1 10",
+      "frequency": 0.17956195571287786,
+      "comments": {
+        "14": "A common mistake, played in 18% of games here. Find the move that punishes it.",
+        "19": "You are clearly better now: about +2.9 by the engine."
+      }
     }
   ]
 }

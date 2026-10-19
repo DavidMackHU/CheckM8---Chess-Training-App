@@ -9,7 +9,7 @@
     "Nc3"
   ],
   "keyFen": "rnbqkbnr/pppp1ppp/8/4p3/4P3/2N5/PPPP1PPP/R1BQKBNR b KQkq - 1 2",
-  "lineCount": 60,
+  "lineCount": 70,
   "lines": [
     {
       "order": 1,
@@ -1612,6 +1612,258 @@
       ],
       "finalFen": "r2q1rk1/1pp2pp1/p1npbn1p/2b1p3/4PP2/2NP2PP/PPP1N1BK/R1BQ1R2 b - - 0 10",
       "frequency": 0.0017
+    },
+    {
+      "order": 61,
+      "name": "Checkmate: Vienna Game: 5... Rg8 (mate in 1)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "Qg4",
+        "Nf6",
+        "Qxg7",
+        "Rg8",
+        "Qxf7#"
+      ],
+      "finalFen": "r1bqk1r1/pppp1Q1p/2n2n2/2b1p3/2B1P3/2N5/PPPP1PPP/R1B1K1NR b KQq - 0 6",
+      "frequency": 0.4126280385262192,
+      "comments": {
+        "10": "A mistake played in 41% of games here. You have a forced mate in 1.",
+        "11": "Checkmate."
+      }
+    },
+    {
+      "order": 62,
+      "name": "Checkmate: Vienna Game: 5... Nd4 (mate in 1)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "Qg4",
+        "g6",
+        "Qf3",
+        "Nd4",
+        "Qxf7#"
+      ],
+      "finalFen": "r1bqk1nr/pppp1Q1p/6p1/2b1p3/2BnP3/2N5/PPPP1PPP/R1B1K1NR b KQkq - 0 6",
+      "frequency": 0.050849285521703966,
+      "comments": {
+        "10": "A mistake played in 5% of games here. You have a forced mate in 1.",
+        "11": "Checkmate."
+      }
+    },
+    {
+      "order": 63,
+      "name": "Checkmate: Vienna Game: 8... Kd8 (mate in 3)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "Qg4",
+        "Qf6",
+        "Nd5",
+        "Qxf2+",
+        "Kd1",
+        "Nf6",
+        "Qxg7",
+        "Rg8",
+        "Nxf6+",
+        "Kd8",
+        "Qxg8+",
+        "Ke7",
+        "Qxf7+",
+        "Kd8",
+        "Qe8#"
+      ],
+      "finalFen": "r1bkQ3/pppp3p/2n2N2/2b1p3/2B1P3/8/PPPP1qPP/R1BK2NR b - - 2 11",
+      "frequency": 0.17148014440433212,
+      "comments": {
+        "16": "A mistake played in 17% of games here. You have a forced mate in 3.",
+        "21": "Checkmate."
+      }
+    },
+    {
+      "order": 64,
+      "name": "Checkmate: Vienna Game: 6... Rg8 (mate in 1)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Nc6",
+        "Bc4",
+        "Bc5",
+        "Qg4",
+        "Nf6",
+        "Qxg7",
+        "Rf8",
+        "d3",
+        "Rg8",
+        "Qxf7#"
+      ],
+      "finalFen": "r1bqk1r1/pppp1Q1p/2n2n2/2b1p3/2B1P3/2NP4/PPP2PPP/R1B1K1NR b KQq - 0 7",
+      "frequency": 0.03232039346565958,
+      "comments": {
+        "12": "A mistake played in 3% of games here. You have a forced mate in 1.",
+        "13": "Checkmate."
+      }
+    },
+    {
+      "order": 65,
+      "name": "Punish: Vienna Game: 3... Qf6 (+2.4)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Bc5",
+        "Nf3",
+        "Qf6",
+        "Nd5",
+        "Qd8",
+        "Nxe5",
+        "d6",
+        "Nf3"
+      ],
+      "finalFen": "rnbqk1nr/ppp2ppp/3p4/2bN4/4P3/5N2/PPPP1PPP/R1BQKB1R b KQkq - 1 6",
+      "frequency": 0.10021677044036305,
+      "comments": {
+        "6": "A common mistake, played in 10% of games here. Find the move that punishes it.",
+        "11": "You are clearly better now: about +2.4 by the engine."
+      }
+    },
+    {
+      "order": 66,
+      "name": "Punish: Bishop's Opening: 2... Qh4 (+2.6)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Qh4",
+        "Nf3",
+        "Qe7",
+        "Nd5",
+        "Qd8",
+        "Nxe5"
+      ],
+      "finalFen": "rnbqkbnr/pppp1ppp/8/3NN3/4P3/8/PPPP1PPP/R1BQKB1R b KQkq - 0 5",
+      "frequency": 0.008009299006128338,
+      "comments": {
+        "4": "A common mistake, played in 1% of games here. Find the move that punishes it.",
+        "9": "You are clearly better now: about +2.6 by the engine."
+      }
+    },
+    {
+      "order": 67,
+      "name": "Punish: Vienna Game: 4... h6 (+2.5)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Bc5",
+        "Nf3",
+        "Nf6",
+        "Bc4",
+        "h6",
+        "Nxe5",
+        "O-O",
+        "Bxf7+",
+        "Rxf7",
+        "Nxf7"
+      ],
+      "finalFen": "rnbq2k1/pppp1Np1/5n1p/2b5/4P3/2N5/PPPP1PPP/R1BQK2R b KQ - 0 7",
+      "frequency": 0.033231223757889713,
+      "comments": {
+        "8": "A common mistake, played in 3% of games here. Find the move that punishes it.",
+        "13": "You are clearly better now: about +2.5 by the engine."
+      }
+    },
+    {
+      "order": 68,
+      "name": "Punish: Vienna Game: 6... Nc6 (+6.5)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Bc5",
+        "Nf3",
+        "Nc6",
+        "Nxe5",
+        "Nxe5",
+        "d4",
+        "Bxd4",
+        "Qxd4",
+        "Nc6",
+        "Qxg7",
+        "Qf6",
+        "Qxf6",
+        "Nxf6",
+        "Bg5"
+      ],
+      "finalFen": "r1b1k2r/pppp1p1p/2n2n2/6B1/4P3/2N5/PPP2PPP/R3KB1R b KQkq - 1 9",
+      "frequency": 0.32237103049022336,
+      "comments": {
+        "12": "A common mistake, played in 32% of games here. Find the move that punishes it.",
+        "17": "You are clearly better now: about +6.5 by the engine."
+      }
+    },
+    {
+      "order": 69,
+      "name": "Punish: Vienna Game: 5... Bb4 (+2.4)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Bc5",
+        "Nf3",
+        "Nc6",
+        "Nxe5",
+        "Nxe5",
+        "d4",
+        "Bb4",
+        "dxe5",
+        "Ne7",
+        "Bd2",
+        "d5",
+        "exd6"
+      ],
+      "finalFen": "r1bqk2r/ppp1nppp/3P4/8/1b2P3/2N5/PPPB1PPP/R2QKB1R b KQkq - 0 8",
+      "frequency": 0.1299290891790967,
+      "comments": {
+        "10": "A common mistake, played in 13% of games here. Find the move that punishes it.",
+        "15": "You are clearly better now: about +2.4 by the engine."
+      }
+    },
+    {
+      "order": 70,
+      "name": "Punish: Bishop's Opening: 3... Na5 (+3.0)",
+      "moves": [
+        "e4",
+        "e5",
+        "Nc3",
+        "Nc6",
+        "Bc4",
+        "Na5",
+        "Bxf7+",
+        "Kxf7",
+        "Qh5+",
+        "g6",
+        "Qxe5"
+      ],
+      "finalFen": "r1bq1bnr/pppp1k1p/6p1/n3Q3/4P3/2N5/PPPP1PPP/R1B1K1NR b KQ - 0 6",
+      "frequency": 0.01156033188463058,
+      "comments": {
+        "6": "A common mistake, played in 1% of games here. Find the move that punishes it.",
+        "11": "You are clearly better now: about +3.0 by the engine."
+      }
     }
   ]
 }
